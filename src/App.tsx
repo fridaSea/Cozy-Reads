@@ -1,16 +1,41 @@
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
 import './App.css'
 import Home from './pages/Home/Home'
+import Login from './pages/Login/Login'
+import Splash from './pages/Splash/Splash'
+import Navbar from './components/Navbar/Navbar'
+import NoMatchPage from './pages/NoMatchPage'
+
+const Root = () => {
+    return (
+      <>
+       <Navbar/>
+       <Outlet/>
+       {/* <Footer/> */}
+      </>
+    )
+  }
+
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-    <div>
-      <h1>Welcome to Cozy Reads</h1>
-      <p>Where stories feel like home.</p>
-    </div>
-    <Home/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"/>
+        <Route element={<Root/>}>
+          <Route index element={<Home/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/splash" element={<Splash/>}/>
+          <Route path="*" element={<NoMatchPage/>}/>
+        </Route>
+      
+      </Routes>
+      
+    </BrowserRouter>
+    
     </>
   )
 }
