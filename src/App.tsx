@@ -5,6 +5,7 @@ import Login from './pages/Login/Login'
 import Splash from './pages/Splash/Splash'
 import Navbar from './components/Navbar/Navbar'
 import NoMatchPage from './pages/NoMatchPage'
+import Background from './assets/Background.png'
 
 const Root = () => {
     return (
@@ -22,6 +23,9 @@ function App() {
 
   return (
     <>
+    <div style={{backgroundImage: `url(${Background})`}}>
+      
+   
     <BrowserRouter>
       <Routes>
         <Route path="/"/>
@@ -35,7 +39,7 @@ function App() {
       </Routes>
       
     </BrowserRouter>
-    
+    </div>
     </>
   )
 }
