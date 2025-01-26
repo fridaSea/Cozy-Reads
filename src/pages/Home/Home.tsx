@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Book } from './typesHome';
+import { Book } from './typesHome'
+import CarouselRatio from '../../components/Carousel/Carousel'
 // import Fetch from '../../components/Fetch/Fetch'
 
 
-<div>
-<h1>Welcome to Cozy Reads</h1>
-<p>Where stories feel like home.</p>
-</div>
+
 
 function Home() {
 
@@ -45,6 +43,12 @@ useEffect(() => {
     
 return (
     <>
+    <div>
+      <h1>Welcome to Cozy Reads</h1>
+      <p>Where stories feel like home.</p>
+        <div> <CarouselRatio data={data}/> </div>
+    </div>
+    
     <h1>Books List</h1>
     <div className="cards-container">
         {data && data.length > 0 ? (
@@ -69,6 +73,8 @@ return (
     </>
 )
 }
+
+
 
 // TRY__
 // useEffect(() => {

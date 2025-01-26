@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-    <div style={{backgroundImage: `url(${Background})`}}>
+    <div style={{backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       
    
     <BrowserRouter>
