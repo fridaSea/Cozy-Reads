@@ -9,14 +9,13 @@ function Splash() {
   return (
     <Container>
     <div>
-      <h2 className='Logo'>This is my Logo</h2>
-      <button className='button'> Hey</button>
+      {/* <h2 className='Logo'>This is my Logo</h2> */}
       {/* <img src={Logo} alt="Logo Crazy Reads"/> */}
       <img src={Logo} alt="Logo Crazy Reads"/>
     </div>
 
     <div>
-        <Button variant="contained" className='button'>Moin</Button>
+        <button className='button'>Welcome</button>
     </div>
 
     </Container>
