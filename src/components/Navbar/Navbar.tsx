@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import './Navbar.css'
 import MenuIcon from '@mui/icons-material/Menu'; 
 
+const pages = ['Home', 'Splash', 'Login'];
+
 function Navbar() {
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -12,6 +14,7 @@ function Navbar() {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#5fe9e0', 
+            // backgroundColor: '#d7ffd9'
             color: '#000000',
             textDecoration: 'none',}}>
             <IconButton

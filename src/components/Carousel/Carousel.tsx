@@ -2,6 +2,7 @@ import AspectRatio from '@mui/joy/AspectRatio'
 import Box from '@mui/joy/Box'
 import Typography from '@mui/joy/Typography'
 import Card from '@mui/joy/Card'
+import './Carousel.css'
 import {book} from '../../pages/Home/typesHome'
 import data from '../../pages/Home/Home' 
 
@@ -53,15 +54,16 @@ function CarouselRatio({data}:CarouselProps) {
                 py: 1,
                 overflow: 'auto',
                 width: 343,
-                scrollSnapType: 'x mandatory',
-                '& > *': {
-                scrollSnapAlign: 'center',
-                },
+                scrollSnapType: 
+                    'x mandatory',
+                    '& > *': {
+                    scrollSnapAlign: 'center',
+                     },
                 '::-webkit-scrollbar': { display: 'none' },
             }}
     >
       {data.map((book: {}, index: number) => (
-        <Card orientation="horizontal" size="sm" key={index} variant="outlined">
+        <Card className="CarouselCards"  orientation="horizontal" size="sm" key={index} variant="outlined" sx={{ maxWidth:'85%', backgroundColor:'transparent'}}>
           <AspectRatio ratio="1" sx={{ minWidth: 60 }}>
             <img
                src={book.volumeInfo.imageLinks?.thumbnail}  // Thumbnail-Bild des Buchcovers
@@ -69,7 +71,7 @@ function CarouselRatio({data}:CarouselProps) {
                className="card-image"
             />
           </AspectRatio>
-          <Box sx={{ whiteSpace: 'nowrap', mx: 1 }}>
+          <Box sx={{ whiteSpace: 'wrap', mx: 1 }}>
             <Typography level="title-md">{book.volumeInfo.title}  </Typography>
             {/* <Typography level="body-sm">{book.volumeInfo.description}</Typography> */}
           </Box>

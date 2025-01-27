@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Book } from './typesHome'
 import CarouselRatio from '../../components/Carousel/Carousel'
+import FullWidthTextField from '../../components/Searchfield';
 // import Fetch from '../../components/Fetch/Fetch'
 
 
@@ -46,7 +47,9 @@ return (
     <div>
       <h1>Welcome to Cozy Reads</h1>
       <p>Where stories feel like home.</p>
+        <FullWidthTextField/>
         <div> <CarouselRatio data={data}/> </div>
+        
     </div>
     
     <h1>Books List</h1>
