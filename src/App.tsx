@@ -6,13 +6,14 @@ import Splash from './pages/Splash/Splash'
 import Navbar from './components/Navbar/Navbar'
 import NoMatchPage from './pages/NoMatchPage'
 import Background from './assets/Background.png'
+import SimpleBottomNavigation from './components/Footer/Footer'
 
 const Root = () => {
     return (
       <>
        <Navbar/>
        <Outlet/>
-       {/* <Footer/> */}
+       <SimpleBottomNavigation/>
       </>
     )
   }
