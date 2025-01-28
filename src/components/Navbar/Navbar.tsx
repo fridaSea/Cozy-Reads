@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import './Navbar.css'
 import MenuIcon from '@mui/icons-material/Menu'; 
 
-const pages = ['Home', 'Splash', 'Login'];
+// const pages = ['Home', 'Splash', 'Login'];
 
 function Navbar() {
     return (
