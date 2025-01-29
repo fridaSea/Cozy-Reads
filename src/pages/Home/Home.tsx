@@ -1,14 +1,17 @@
-import React, { FormEvent, useEffect, useMemo, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useMemo, useState } from "react";
 import { Book } from "./typesHome";
 import CarouselRatio from "../../components/Carousel/Carousel";
 import FullWidthTextField from "../../components/Searchfield";
 // import Fetch from '../../components/Fetch/Fetch'
 import "./Home.css";
+import { AuthContext } from "../../components/Context/AuthContext";
 
 type items = string;
 
 function Home() {
-  console.log("Home rendered");
+  // console.log("Home rendered");
+
+
   const book = "crime";
   // self, computers / webdevelopment , Biography & Autobiography
   // Filtervorgaben: Categorie, Sprache, weniger/ mehr als 200 Seiten, (Published by year), publisher
@@ -20,6 +23,8 @@ function Home() {
   const [data, setData] = useState<Array<Book>>([]);
   const [searchItem, setSearchItem] = useState("");
   const [filteredBooks, setFilteredBooks] = useState<Array<Book>>([]);
+
+  const {user} = useContext(AuthContext);
 
   // const [filterValue, setFilterValue] = useState(""); // Filter für die Suche verwalten
 
@@ -100,8 +105,12 @@ console.log("userAgent", navigator.userAgent)
   return (
     <>
       <div>
-        <h1>Welcome to Cozy Reads</h1>
+      <h1>Welcome to Cozy Reads</h1>
+      
         <p>Where stories feel like home.</p>
+        <br />
+        {user ? <p>Nice to have you here, {user?.userName}.</p> : " "}
+        {user ? <p>What would you like to read today, {user?.userName}?</p> : " "}
         <div>
           {" "}
           {navigator.userAgent.includes("Pixel") &&<CarouselRatio data={data} /> }
