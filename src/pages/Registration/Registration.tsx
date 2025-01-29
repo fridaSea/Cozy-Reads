@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './Login.css'; 
+// import './Login.css'; 
 import { Link, useNavigate } from "react-router";
 
 
-function Login() {
+function Registration () {
 
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function Login() {
     password: '',
     confirmPassword: '',
   });
-
+ 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -43,8 +43,19 @@ function Login() {
 
   return (
     <div className="form-container">
-      <h2>Login</h2>
+      <h2>Registration</h2>
       <form className="registration-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -70,7 +81,17 @@ function Login() {
           />
         </div>
 
-      
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
 {/* BUTTON EINFÜGEN UND NICHT ONCLICK???? */}
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -79,10 +100,10 @@ function Login() {
 
 
         <div>
-          <p>Don`t have an account? Register <Link to="/registration"> here </Link>. 
-          ODER 2 Buttons verlinkt</p>
+          <p>Already have an account? Login <Link to="/login"> here </Link> . 
+          
+        ODER 2 Buttons verlinkt</p>
      {/* 2 Buttons see here: https://www.youtube.com/watch?v=8QgQKRcAUvM  */}
-          <p>Forgot pasword?</p>
           
         </div>
       </form>
@@ -91,4 +112,4 @@ function Login() {
 }
 
 
-export default Login
+export default Registration 
