@@ -5,6 +5,10 @@ import FullWidthTextField from "../../components/Searchfield";
 // import Fetch from '../../components/Fetch/Fetch'
 import "./Home.css";
 import { AuthContext } from "../../components/Context/AuthContext";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { Grid, Typography } from "@mui/joy";
+import { CardMedia } from "@mui/material";
 
 type items = string;
 
@@ -12,7 +16,7 @@ function Home() {
   // console.log("Home rendered");
 
 
-  const book = "crime";
+  const book = "self";
   // self, computers / webdevelopment , Biography & Autobiography
   // Filtervorgaben: Categorie, Sprache, weniger/ mehr als 200 Seiten, (Published by year), publisher
 
@@ -122,24 +126,62 @@ console.log("userAgent", navigator.userAgent)
       <div className="cards-container">
         <FullWidthTextField handleInputChange={handleInputChange} />
 
-        {data && filteredItems.length > 0 ? (
+      {filteredItems.length === 0 && filteredBooks !== "" ? (
+        <Typography variant="h5" component="div" sx={{color:'#e4a788', textAlign:'center', marginTop: '20px'}}>
+        No results found for "{filteredBooks}"
+        </Typography>
+      ) : (
+          <Grid container spacing={3} className="GridContainer">
+
+          
+          <Grid item xs={12} md={4} lg={3} >
+            {data && filteredItems.length > 0 ? (
           filteredItems.map((book, index: number) => (
-            <div className="card" key={index}>
-              <img
-                src={book.volumeInfo.imageLinks?.thumbnail} // Thumbnail-Bild des Buchcovers
-                alt={book.volumeInfo.title}
-                className="card-image"
+
+          
+
+                
+            <Card variant="outlined" key={index} sx={{ maxWidth: 345,
+              marginTop: '10px',
+              borderRadius: "8px"
+              }}>
+               <CardMedia
+             component="img"
+             image={book.volumeInfo.imageLinks?.thumbnail}
+              alt={book.volumeInfo.title}
               />
-              <div className="card-body">
-                <h2>{book.volumeInfo.title}</h2>
-                <p>{book.volumeInfo.authors?.join(", ")}</p>
-                <p>{book.volumeInfo.description}</p>
-              </div>
+              
+              <CardContent>
+              <Typography gutterBottom variant="h5" component="div" 
+              sx={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis"
+              }}>
+               <h3> {book.volumeInfo.title} </h3>
+               <p>{book.volumeInfo.subtitle}</p>
+               From: {book.volumeInfo.authors?.join(", ")}
+              </Typography>
+              </CardContent>
+
+
+              <div>
+                <button className='button'>Read More</button>
             </div>
+
+            </Card>
+
           ))
         ) : (
           <p>No Books found</p>
         )}
+
+</Grid>
+          </Grid>
+      )
+      }
+
+        
       </div>
     </>
   );
