@@ -12,6 +12,7 @@ import { AuthContextProvider } from './components/Context/AuthContext'
 import Login from './pages/Login/Login'
 import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
+import BookDetail from './pages/BookDetail/BookDetail'
 
 const Root = () => {
     return (
@@ -45,6 +46,7 @@ function App() {
                 <Favorites/>
             </ProtectedRoute>
             }/>
+          <Route path="/bookdetail" element={<BookDetail/>}/>
           <Route path="*" element={<NoMatchPage/>}/>
         </Route>
       </Routes>

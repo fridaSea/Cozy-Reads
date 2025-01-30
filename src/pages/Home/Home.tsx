@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Grid, Typography } from "@mui/joy";
 import { CardMedia } from "@mui/material";
+import { Link } from "react-router";
 
 type items = string;
 
@@ -166,7 +167,8 @@ console.log("userAgent", navigator.userAgent)
 
 
               <div>
-                <button className='button'>Read More</button>
+                <button className='button'> 
+                <Link to="/bookdetail">read more</Link></button>
             </div>
 
             </Card>
