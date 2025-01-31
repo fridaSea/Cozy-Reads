@@ -56,16 +56,16 @@ function Home() {
   // // Filter / Search
 
   const handleInputChange = (e: FormEvent<HTMLDivElement>) => {
-    console.log("asdasdasdasd");
+    // console.log("asdasdasdasd");
     const target = e.target as HTMLInputElement;
     const searchTerm = target.value;
-    console.log("searchTerm :>> ", searchTerm);
+    // console.log("searchTerm :>> ", searchTerm);
     setSearchItem(searchTerm);
   };
 
   const filteredItems = data.filter((myBook) => {
     if (myBook.volumeInfo.authors && myBook.volumeInfo.authors.length > 0) {
-      console.log("searchItem", searchItem);
+      // console.log("searchItem", searchItem);
 
       return myBook.volumeInfo.authors[0]
         .toLowerCase()

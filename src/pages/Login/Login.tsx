@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Login.css'; 
 import { Link, useNavigate } from "react-router";
 
@@ -25,6 +25,7 @@ function Login() {
     });
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
