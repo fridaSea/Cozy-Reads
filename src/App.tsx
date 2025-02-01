@@ -13,6 +13,7 @@ import Login from './pages/Login/Login'
 import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
+import { app, auth } from './configuration/firebaseConfig'
 
 const Root = () => {
     return (
@@ -27,6 +28,8 @@ const Root = () => {
 
 function App() {
   // const [count, setCount] = useState(0)
+  // console.log('app:>>', app); -> used to see, whether it is working or not
+  // console.log('auth:>>', auth) -> used to see, whether it is working or not
 
   return (
     <>
