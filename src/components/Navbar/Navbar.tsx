@@ -42,7 +42,7 @@ function Navbar() {
             </Typography>
             {user ? (
                 <Button onClick={logout} color="inherit" >
-              Loged out</Button>
+              Log out</Button>
               ) : (
                 <Button onClick={login} variant="danger">Login</Button>
               )

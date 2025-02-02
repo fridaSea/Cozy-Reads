@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { User } from "../../types/customTypes";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../configuration/firebaseConfig";
 
 //3 Define providers props type
@@ -108,10 +108,41 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
       //     console.log("error message:>>", error.message);
       //   });
       }
+
+      // this function I gonna call it, everytime I want to know if my user is logged in or not: Whenever it is called, it will connect with firebas and bring back any user / the user, that are logged in.
+      // if it finds it, we will see the information, if not, we will see the message, that the user is signed out.  
+      const checkUserStatus = () => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // const uid = user.uid;
+              const userEmail = user.email;
+              const id = user.uid;
+              if (userEmail && id) {
+                setUser({email: userEmail, id});
+              }else {
+                throw new Error ("Userinformation not found");
+              }
+            // ...
+            console.log("%c user is logged in", "color:green", user.email);
+
+          } else {
+            // User is signed out
+            console.log("%c user is signed out", "color:red");
+            setUser(null);
+        };
+      });
+      }
     
       const logout = () => {
         setUser(null);
       }
+
+
+      useEffect(() => {
+        checkUserStatus();
+      }, [])
+      
 
 //7 in providers property value include the elements (states, functions, variables) you want to share and  .....
     return (
