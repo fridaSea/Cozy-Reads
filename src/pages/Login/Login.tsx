@@ -1,51 +1,55 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import './Login.css'; 
 import { Link, useNavigate } from "react-router";
+import { Button } from '@mui/material';
+import { AuthContext } from '../../components/Context/AuthContext';
 
 
 function Login() {
 
+  const {login} = useContext(AuthContext); 
+
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
+  const handleEmailChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+   }
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setErrorMessage('Passwords do not match!');
-      setSuccessMessage('');
-    } else {
-      setErrorMessage('');
-      setSuccessMessage('Registration Successful!');
-      setTimeout(() => {
-          navigate('/home');
-         }, 1000); 
+   const handlePasswordChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
+   }
 
-      
-    }
-  };
+   const handleSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // this is going to prefent the form from refreshing the page when submittet
+    // console.log("email, password, username:>>", email, password, username)
+    login(email, password);
+   }
+
+   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (formData.password !== formData.confirmPassword) {
+  //     setErrorMessage('Passwords do not match!');
+  //     setSuccessMessage('');
+  //   } else {
+  //     setErrorMessage('');
+  //     setSuccessMessage('Registration Successful!');
+  //     setTimeout(() => {
+  //         navigate('/home');
+  //        }, 1000); 
+  //   }
+  // };
 
   return (
     <div className="form-container">
       <h2>Login</h2>
-      <form className="registration-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmitLogin}>
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -53,8 +57,8 @@ function Login() {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={handleEmailChange}
             required
           />
         </div>
@@ -65,13 +69,15 @@ function Login() {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={handlePasswordChange}
             required
           />
         </div>
 
-      
+        <div>
+          <Button type="submit">Login</Button>
+        </div>
 {/* BUTTON EINFÜGEN UND NICHT ONCLICK???? */}
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}

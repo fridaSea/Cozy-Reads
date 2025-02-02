@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { User } from "../../types/customTypes";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../configuration/firebaseConfig";
 
 //3 Define providers props type
@@ -12,7 +12,7 @@ type AuthContextProviderProps = {
 type AuthContextType = {
   user: User | null;
   registration: (email:string, password:string)=> Promise<void>
-  login: () => void;
+  login: (email:string, password:string)=> Promise<void>
   logout: () => void;
 }
 
@@ -32,11 +32,11 @@ export const AuthContext = createContext<AuthContextType>(contextInitialValue);
 export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
   
 // 4 Move to the provider all the states and functions you want to share bzw. when starting a new project you create them directly there 
-  const user1: User ={
-    email: "maria@test.com",
-    // userName: "Maria",
-    password: "1234"
-  }
+  // const user1: User ={
+  //   email: "maria@test.com",
+  //   userName: "Maria",
+  //   password: "1234"
+  // }
 
   const [user, setUser] = useState<User | null>(null)
 
@@ -69,11 +69,31 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
     //     // ..
     //   });
   }
-
-
     //Login & Logout functionality
-    const login = () => {
-        setUser(user1);
+    const login = async (email:string, password:string) => {
+        // setUser();
+        console.log("email, password:>>", email, password);
+      try {
+        const userLoginCredential = await signInWithEmailAndPassword(auth, email, password)
+        const user = userLoginCredential.user;
+        console.log("user logged in:>>", user);
+      } catch (err) {
+        const error = err as Error 
+        console.log("error message:>>", error.message);
+      }
+
+
+      // signInWithEmailAndPassword(auth, email, password)
+      //   .then((userCredential) => {
+      //     // Signed in 
+      //     const user = userCredential.user;
+      //     console.log("user logged in:>>", user);
+      //   })
+      //   .catch((error) => {
+      //     const errorCode = error.code;
+      //     const errorMessage = error.message;
+      //     console.log("error message:>>", error.message);
+      //   });
       }
     
       const logout = () => {
