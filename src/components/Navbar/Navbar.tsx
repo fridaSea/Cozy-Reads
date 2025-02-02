@@ -40,8 +40,14 @@ function Navbar() {
                 <Link className='Link' to ={"/splash"}>Splash</Link>
                 <Link className='Link' to ={"/favorites"}>Favorites</Link>
             </Typography>
-            {user ? <Button onClick={logout} color="inherit" variant="danger">Logout</Button> : <Button onClick={login}>Login</Button>}
-           
+            {user ? (
+                <Button onClick={logout} color="inherit" >
+              Loged out</Button>
+              ) : (
+                <Button onClick={login} variant="danger">Login</Button>
+              )
+              } 
+
           </Toolbar>
         </AppBar>
       </Box>
