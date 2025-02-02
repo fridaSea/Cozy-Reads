@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { User } from "../../types/customTypes";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../configuration/firebaseConfig";
 
 //3 Define providers props type
@@ -135,7 +135,15 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
       }
     
       const logout = () => {
-        setUser(null);
+        signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          console.log("%c user is signed out", "color:red");
+          setUser(null);
+        }).catch((error) => {
+          // An error happened. - The user could not be signed out.
+          console.log("Probmelms sogninh out user");
+        });
       }
 
 
