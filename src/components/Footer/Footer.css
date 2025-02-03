@@ -1,5 +1,5 @@
 .bottomNavigation{
    position: absolute !important;
    bottom: 0 !important;
-   background-color: blue !important;
+   width: 100%;
 }

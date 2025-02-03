@@ -10,21 +10,23 @@ import SurfingIcon from '@mui/icons-material/Surfing';
 import AccountBoxIcon from '@mui/icons-material/AccountBox'; 
 import { Link, useNavigate } from 'react-router';
 import Home from '../../pages/Home/Home'
+import  './Footer.css'
 
 function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
 
   return (
-    <Box className='bottomNavigation' sx={{ width: '100%' }}>
-      <BottomNavigation 
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue) ;
-        }}
-      >
-        <BottomNavigationAction 
+      <Box className='bottomNavigation'>
+
+        <BottomNavigation 
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue) ;
+          }}
+        >
+        <BottomNavigationAction className='bottomNavigationAction'
             label="Home" 
             value={value}
             onClick={() =>navigate("/")
@@ -37,8 +39,8 @@ function SimpleBottomNavigation() {
         <BottomNavigationAction label="Buy us a surf break" icon={<SurfingIcon />} /> */}
         <BottomNavigationAction label="Profil" value={value} onClick={() =>navigate("/login")
             } icon={<AccountBoxIcon />} />
-      </BottomNavigation>
-    </Box>
+        </BottomNavigation>
+      </Box>
   );
 }
 
