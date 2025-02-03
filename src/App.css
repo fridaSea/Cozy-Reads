@@ -1,3 +1,16 @@
+/* In App.css oder einer globalen CSS-Datei */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url('./assets/Background_weichzeichner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* @media only screen and (max-width: 600px) {
   .backgroundImage{
       width: 100%;

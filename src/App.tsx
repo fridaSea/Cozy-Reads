@@ -33,8 +33,8 @@ function App() {
 
   return (
     <>
-    <div style={{backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      
+    <div>
+{/* Wenn ich das nutzen möchte, muss es wieder in das div oben drüber: style={{backgroundImage: `url(${Background})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}} - */}
    <AuthContextProvider>
    <BrowserRouter>
       <Routes>
