@@ -14,6 +14,7 @@ import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
 import { app, auth } from './configuration/firebaseConfig'
+import Forum from './pages/Forum/Forum'
 
 const Root = () => {
     return (
@@ -50,6 +51,7 @@ function App() {
             </ProtectedRoute>
             }/>
           <Route path="/bookdetail" element={<BookDetail/>}/>
+          <Route path="/forum" element={<Forum/>}/>
           <Route path="*" element={<NoMatchPage/>}/>
         </Route>
       </Routes>
