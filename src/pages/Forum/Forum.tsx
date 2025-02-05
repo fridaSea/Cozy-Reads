@@ -10,6 +10,7 @@ type MessageType = {
     author: string;
     text: string;
     date: Timestamp;
+    id: string;
 }
 
 function Forum() {
@@ -24,7 +25,13 @@ function Forum() {
         querySnapshot.forEach((doc) => {
             console.log('doc:>>', doc)
           console.log(`${doc.id} => ${doc.data().text}`);
-          const message = doc.data() as MessageType;
+          const message: MessageType = {
+            text: doc.data().text,
+            date: doc.data().date,
+            athor: doc.data().author,
+            id: doc.id
+          }
+          
           messagesArray.push(message);
           setMessages(messagesArray)
         });
@@ -52,7 +59,7 @@ function Forum() {
       
         {messages && messages.map( (message) => {
           return (
-            <Card sx={{ maxWidth: 345 }} key={message.date.nanoseconds}>
+            <Card sx={{ maxWidth: 345 }} key={message.id}>
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {message.author}
