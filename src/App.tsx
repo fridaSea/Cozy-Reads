@@ -13,7 +13,7 @@ import Login from './pages/Login/Login'
 import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
-import { app, auth } from './configuration/firebaseConfig'
+import { app, auth, db } from './configuration/firebaseConfig'
 import Forum from './pages/Forum/Forum'
 
 const Root = () => {
@@ -31,6 +31,7 @@ function App() {
   // const [count, setCount] = useState(0)
   // console.log('app:>>', app); -> used to see, whether it is working or not
   // console.log('auth:>>', auth) -> used to see, whether it is working or not
+  //  console.log('db:>>', db) -> used to see, whether it is working or not
 
   return (
     <>
@@ -45,7 +46,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
           <Route path="/splash" element={<Splash/>}/>
-          <Route path="/favorites" element={
+          <Route path="/favorites" element={ 
             <ProtectedRoute>
                 <Favorites/>
             </ProtectedRoute>
