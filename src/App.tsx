@@ -51,7 +51,11 @@ function App() {
             </ProtectedRoute>
             }/>
           <Route path="/bookdetail" element={<BookDetail/>}/>
-          <Route path="/forum" element={<Forum/>}/>
+          <Route path="/forum" element={
+            <ProtectedRoute>
+                <Forum/>
+            </ProtectedRoute>
+            }/>
           <Route path="*" element={<NoMatchPage/>}/>
         </Route>
       </Routes>
