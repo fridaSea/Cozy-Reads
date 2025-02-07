@@ -1,5 +1,5 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Stack, TextField, Typography } from "@mui/material"
-import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import { Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { addDoc, collection, getDocs, onSnapshot, query, Timestamp } from "firebase/firestore";
 import { db } from "../../configuration/firebaseConfig";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
@@ -45,7 +45,7 @@ function Forum() {
     //RAUL:  e: ChangeEvent<HTMLTextAreaElement>
     // Write the message
     const handleMessageTextChange = (e:ChangeEvent<HTMLInputElement>) => {
-      console.log('e.target.value :>>' , e.target.value);
+    //   console.log('e.target.value :>>' , e.target.value);
       setMessageText(e.target.value);
     }
 
@@ -72,12 +72,33 @@ function Forum() {
         }   
         if(docRef){
             console.log("Document written with ID: ", docRef.id);
+            // getMessages();
         }
-    
+    };
+
+
+    const getMessagesLive = () => {
+        const q = query(collection(db, "forum"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            // they are creating an empty array and then they are looping over this snapshot and then they push the elements to the forums array
+          const messagesArray:MessageType[] = [];
+          querySnapshot.forEach((doc) => {
+            const message: MessageType = {
+                text: doc.data().text,
+                date: doc.data().date,
+                author: doc.data().author,
+                id: doc.id
+              }
+            messagesArray.push(message);
+            setMessages(messagesArray);
+          });
+        //   console.log("Current cities in CA: ", messagesArray.join(", "));
+        });
     }
 
     useEffect(() => {
-      getMessages()
+    //   getMessages()
+        getMessagesLive();
     }, [])
     
 
