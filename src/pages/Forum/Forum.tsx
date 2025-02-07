@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
-import { addDoc, collection, getDocs, onSnapshot, query, Timestamp } from "firebase/firestore";
+import { addDoc, collection, getDocs, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "../../configuration/firebaseConfig";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
@@ -16,6 +16,8 @@ function Forum() {
 
     const [messages, setMessages] = useState<MessageType[] | null >(null)
     const [messageText, setMessageText] = useState<string>("");
+
+    
 
     const getMessages = async () => {
         const querySnapshot = await getDocs(collection(db, "forum"));
@@ -49,11 +51,6 @@ function Forum() {
       setMessageText(e.target.value);
     }
 
-    // const resetForm = () => {
-    //     if(document.getElementById) {
-    //         document.form.reset();
-    //         }
-    // }
 
     // Submit the message 
     const handleMessageSubmit = async (e:FormEvent<HTMLFormElement>) => {
@@ -73,7 +70,7 @@ function Forum() {
         };
       // Add a new document with a generated id.
       try {
-        const docRef = await addDoc(collection(db, "forum"),newMessage);
+        const docRef = await addDoc(collection(db, "forum"),newMessage); 
         if (docRef) {
             console.log("Document written with ID: ", docRef.id);
             // getMessages();
@@ -83,12 +80,16 @@ function Forum() {
       } catch (error) {
         throw new Error ("Something happend!")
       }
-         
+        
     };
 
 
     const getMessagesLive = () => {
-        const q = query(collection(db, "forum"));
+        // Order the messages by date
+        // TO DO - INSERT PAGINATION 
+        const docRef = collection(db, "forum");
+        const q = query(docRef, orderBy("date" , "asc"), limit(4)); 
+        // Snapshot
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             // they are creating an empty array and then they are looping over this snapshot and then they push the elements to the forums array
           const messagesArray:MessageType[] = [];
@@ -105,7 +106,6 @@ function Forum() {
         //   console.log("Current cities in CA: ", messagesArray.join(", "));
         });
     }
-
 
 
     useEffect(() => {
