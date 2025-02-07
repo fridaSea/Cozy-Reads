@@ -49,10 +49,17 @@ function Forum() {
       setMessageText(e.target.value);
     }
 
+    // const resetForm = () => {
+    //     if(document.getElementById) {
+    //         document.form.reset();
+    //         }
+    // }
+
     // Submit the message 
     const handleMessageSubmit = async (e:FormEvent<HTMLFormElement>) => {
         // the default behaviour of a form is always to refresh the page. O prevent that with the following: 
-        e.preventDefault()
+        e.preventDefault();
+   
         // if you try to send a message and you are not logged in you will get a warning here - TO DO: BUILD AN APPROPIATE ERROR MESSAGE TO SHOW TO THE USER 
         // this is just double checking becuase it is a protected route and shouldn`t be accessabile in the first place 
         if(!user) {
@@ -65,15 +72,18 @@ function Forum() {
             author: user.email
         };
       // Add a new document with a generated id.
+      try {
         const docRef = await addDoc(collection(db, "forum"),newMessage);
-        if (!docRef) {
-            throw new Error ("Something happend!")
-            // I don`t need to return, becuase if you throw an error you don`t need to put it because it stops there 
-        }   
-        if(docRef){
+        if (docRef) {
             console.log("Document written with ID: ", docRef.id);
             // getMessages();
+            setMessageText("");
         }
+
+      } catch (error) {
+        throw new Error ("Something happend!")
+      }
+         
     };
 
 
@@ -95,6 +105,8 @@ function Forum() {
         //   console.log("Current cities in CA: ", messagesArray.join(", "));
         });
     }
+
+
 
     useEffect(() => {
     //   getMessages()
@@ -144,10 +156,11 @@ function Forum() {
           maxRows={4}
           variant="outlined"
           onChange={handleMessageTextChange}
+          value={messageText}
           />
           
       </div>
-      <Button type="submit" variant="outlined" >
+      <Button type="submit" variant="outlined">
       Send
       </Button>
       </Box>
