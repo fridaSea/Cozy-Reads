@@ -117,7 +117,7 @@ function Forum() {
     
 
   return (
-    <div className="pageStyle" sx={{textAlign:'center'}}
+    <div className="pageStyle"
     // sx={{ marginBottom:'15px', marginLeft:'15px', marginRight:'15px',}}
     >
       <h1>
