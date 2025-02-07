@@ -1,8 +1,10 @@
-import { Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
 import { addDoc, collection, getDocs, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "../../configuration/firebaseConfig";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import './Forum.css'; 
 
 type MessageType = {
     author: string;
@@ -115,61 +117,182 @@ function Forum() {
     
 
   return (
-    <div>
+    <div className="pageStyle" sx={{textAlign:'center'}}
+    // sx={{ marginBottom:'15px', marginLeft:'15px', marginRight:'15px',}}
+    >
       <h1>
         This is your Place to connect - THE FORUM
       </h1>
-      <div>
-      <Stack gap={3} className="align-items-center">
-      
-      {messages && messages.map( (message) => {
-        return (
-          <Card sx={{ maxWidth: 345 }} key={message.id}>
-              <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                  {message.author}
-              </Typography>
-              <Typography gutterBottom variant="p" component="div">
-                  {formatDate(message.date.seconds)}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {message.text}
-              </Typography>
-              </CardContent>
-          </Card>
-        )
-      })}
 
-      
-      <Box
-      component="form" onSubmit={handleMessageSubmit}
-      sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-      noValidate
-      autoComplete="off"
-      
-      >
-      <div>
-          <TextField
-          id="outlined-multiline-flexible"
-          label="Your Text"
-          multiline
-          maxRows={4}
-          variant="outlined"
-          onChange={handleMessageTextChange}
-          value={messageText}
-          />
-          
-      </div>
-      <Button type="submit" variant="outlined">
-      Send
-      </Button>
-      </Box>
-     
+    <Accordion className="accordion">
+        <AccordionSummary
+          expandIcon={<ArrowDropDownIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          <Typography component="span">Which book should every person have read at least once?</Typography>
+        </AccordionSummary>
+
+    <Stack gap={3} className="align-items-center" >
+        <AccordionDetails className="accordionDetails">
+        {messages && messages.map( (message) => {
+            return (
+            <Card sx={{ maxWidth: 345 , marginBottom:'15px', marginLeft:'15px', marginRight:'15px'}} key={message.id} sx={{ marginBottom:'15px', marginLeft:'15px', marginRight:'15px',}}>
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {message.author}
+                </Typography>
+                <Typography gutterBottom variant="p" component="div">
+                    {formatDate(message.date.seconds)}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    {message.text}
+                </Typography>
+                </CardContent>
+            </Card>
+            )
+        })}
+        </AccordionDetails>
+
+        <Box
+        component="form" onSubmit={handleMessageSubmit}
+        sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+        noValidate
+        autoComplete="off"
+        
+        >
+            <div>
+                <TextField
+                id="outlined-multiline-flexible"
+                label="Your Text"
+                multiline
+                maxRows={4}
+                variant="outlined"
+                onChange={handleMessageTextChange}
+                value={messageText}
+                />
+            </div>
+                <Button type="submit" variant="outlined">
+                Send
+                </Button>
+        </Box>
     </Stack>
+       
+     </Accordion>
 
-      </div>
+{/* ACCORDION 2 */}
+<Accordion className="accordion">
+        <AccordionSummary
+          expandIcon={<ArrowDropDownIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          <Typography component="span">What is your favorite author?</Typography>
+        </AccordionSummary>
+
+    <Stack gap={3} className="align-items-center">
+        <AccordionDetails>
+        {messages && messages.map( (message) => {
+            return (
+            <Card sx={{ maxWidth: 345 }} key={message.id}>
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {message.author}
+                </Typography>
+                <Typography gutterBottom variant="p" component="div">
+                    {formatDate(message.date.seconds)}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    {message.text}
+                </Typography>
+                </CardContent>
+            </Card>
+            )
+        })}
+        </AccordionDetails>
+
+        <Box
+        component="form" onSubmit={handleMessageSubmit}
+        sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+        noValidate
+        autoComplete="off"
+        >
+            <div>
+                <TextField
+                id="outlined-multiline-flexible"
+                label="Your Text"
+                multiline
+                maxRows={4}
+                variant="outlined"
+                onChange={handleMessageTextChange}
+                value={messageText}
+                />
+            </div>
+                <Button type="submit" variant="outlined">
+                Send
+                </Button>
+        </Box>
+    </Stack>
+       
+     </Accordion>
     </div>
+
   )
 }
 
 export default Forum;
+
+// ALLES WAS NACH RETURN (  .. KOMMT UM DEN CHAT ZU BAUEN 
+// <div>
+//       <h1>
+//         This is your Place to connect - THE FORUM
+//       </h1>
+//       <div>
+//       <Stack gap={3} className="align-items-center">
+      
+//       {messages && messages.map( (message) => {
+//         return (
+//           <Card sx={{ maxWidth: 345 }} key={message.id}>
+//               <CardContent>
+//               <Typography gutterBottom variant="h5" component="div">
+//                   {message.author}
+//               </Typography>
+//               <Typography gutterBottom variant="p" component="div">
+//                   {formatDate(message.date.seconds)}
+//               </Typography>
+//               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+//                   {message.text}
+//               </Typography>
+//               </CardContent>
+//           </Card>
+//         )
+//       })}
+
+      
+//       <Box
+//       component="form" onSubmit={handleMessageSubmit}
+//       sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+//       noValidate
+//       autoComplete="off"
+//       >
+//         <div>
+//             <TextField
+//             id="outlined-multiline-flexible"
+//             label="Your Text"
+//             multiline
+//             maxRows={4}
+//             variant="outlined"
+//             onChange={handleMessageTextChange}
+//             value={messageText}
+//             />
+//         </div>
+//             <Button type="submit" variant="outlined">
+//             Send
+//             </Button>
+//        </Box>
+     
+//     </Stack>
+
+
+//       </div>
+//     </div>
