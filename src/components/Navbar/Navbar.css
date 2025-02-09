@@ -2,11 +2,135 @@
     background-color: #5fe9e0 !important;
 } */
 
-.Link{
+/* .Link{
     text-decoration: none;
     color: #000000;
     /* variant: h6 ;
     component: div ;
-    flexGrow: 1  */
-}
+    flexGrow: 1  
+} */
     
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* body {
+    background-color: #5fe9e0;
+    height: 5000px;
+    font-family: ..; 
+} */
+
+.header {
+    background-color: rgb(19, 22, 26);
+}
+
+.headerContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    min-height: 60px;
+}
+
+.logo {
+    color: #fff;
+    font-size: 23px;
+    letter-spacing: -1.5px;
+    font-weight: 500;
+    column-gap: 40px;
+}
+
+.nav{
+    transition: all 0.3s ease-in-out;
+}
+
+.navList{
+    display: flex;
+    column-gap: 40px;
+}
+
+.navItem{
+
+}
+
+.navLink{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    transition: all 0.4s;
+    /* any property that gets changed should happen in 0.4s */
+}
+
+.navLink:hover,
+.navLink:focus{
+    color: rgba(255, 255, 255, 1);
+}
+
+.hamburgerMenu{
+    display: none;
+    cursor: pointer;
+}
+
+/* eventuell raus, wenn ich statt den strichen einfach ein Icon einbaue */
+.bar{
+    height: 2px;
+    width: 27px;
+    background-color: #fff;
+    margin: 5px 0;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out
+}
+
+.nav--open{
+    transform: translate(0) !important;
+}
+
+.hamburgerMenu--open .bar_nth-child(1){
+    transform: translateY(7px) rotate(45deg)
+}
+ 
+.hamburgerMenu--open .bar_nth-child(2){
+    opacity: 0;
+}
+
+.hamburgerMenu--open .bar_nth-child(3){
+    transform: translateY(-7px) rotate(-45deg)
+}
+
+
+@media (max-width:650px) {
+    .nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        background-color: rgb(19, 22, 26);  
+        width: 100%;
+        padding: 10px 0 25px;
+        transform: translateX(100%);
+    }
+
+    .navList{
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+    }
+
+    .navLink{
+        font-size: 14px;
+    }
+
+    .hamburgerMenu{
+        display: block;
+    }
+}
