@@ -1,5 +1,34 @@
 .bottomNavigation{
-   position: absolute !important;
+   position: fixed !important;
    bottom: 0 !important;
    width: 100%;
+}
+
+.Footer {
+   position: fixed !important;
+   bottom: 0 !important;
+   width: 100%;
+   display: flex;
+    gap: 105px;
+    justify-content: center;
+    align-items: center;
+    /* justify-items: center;
+    align-content: center; */
+    margin-top: auto;
+}
+
+img{
+ height:25%
+}
+
+@media(max-width: 650px) {
+   .Footer{
+      display: none;
+     }
+}
+
+@media (min-width:650px) {
+  .bottomNavigation{
+   display: none;
+}
 }
