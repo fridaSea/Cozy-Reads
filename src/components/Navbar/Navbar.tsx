@@ -11,7 +11,7 @@ const pages = ['Home', 'Splash', 'Login', 'Favorites'];
 
 function Navbar() {
   //9 Subscribe to the context and use the elements available 
-  const {user, login, logout}=useContext(AuthContext)
+  const {user, login, logout} = useContext(AuthContext)
 
   const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null);
   const openMenu = (event:MouseEvent<HTMLElement>) => {
@@ -64,12 +64,23 @@ function Navbar() {
                     <a href='/' className='navLink'>Home </a>
                   </li>
                   <li className='navItem'>
-                    <a href='./Login' className='navLink'>Login </a>
-                  </li>
-                  <li className='navItem'>
                     <a href='./favorites' className='navLink'>Favorites </a>
                   </li>
+                  <li>
+                  {user ? (
+                    <a href='./Login' className='navLink' onClick={logout} color="inherit">Log out </a>
+                  ) : (
+                    <a href='./Login' className='navLink' onClick={login} variant="danger">Login </a>
+                  )
+                  } 
+                  </li>
+                   {/* <li className='navItem'>
+                    <a href='./Login' className='navLink'>Login </a>
+                  </li> */}
               </ul>
+              
+              
+            
             </nav>
             
 
