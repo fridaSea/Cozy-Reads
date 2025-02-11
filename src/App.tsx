@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
 import { app, auth, db } from './configuration/firebaseConfig'
 import Forum from './pages/Forum/Forum'
+import FAQ from './pages/FAQ/FAQ'
 
 const Root = () => {
     return (
@@ -46,12 +47,13 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/registration" element={<Registration/>}/>
           <Route path="/splash" element={<Splash/>}/>
+          <Route path="/faq" element={<FAQ/>}/>
           <Route path="/favorites" element={ 
             <ProtectedRoute>
                 <Favorites/>
             </ProtectedRoute>
             }/>
-          <Route path="/bookdetail" element={<BookDetail/>}/>
+          <Route path="/books/:bookDetail" element={<BookDetail/>}/>
           <Route path="/forum" element={
             <ProtectedRoute>
                 <Forum/>
