@@ -10,9 +10,9 @@ function Login() {
   const {login} = useContext(AuthContext); 
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/')
- }
+//   const handleClick = () => {
+//     navigate('/')
+//  }
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -25,12 +25,19 @@ function Login() {
     setPassword(e.target.value);
    }
 
-   const handleSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
+   
+
+   const handleSubmitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // this is going to prefent the form from refreshing the page when submittet
     // console.log("email, password, username:>>", email, password, username)
-    login(email, password);
-   }
+    const isLoggedIn = await login(email, password);
+    if(isLoggedIn) {
+      navigate('/');
+    } else {
+      setErrorMessage('Login didn`t work. Try again.')
+    }
+   };
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -93,18 +100,17 @@ function Login() {
         </div>
 
         <div>
-          <Button type="submit">Login</Button>
+          <Button type="submit" >Login</Button>
         </div>
 {/* BUTTON EINFÜGEN UND NICHT ONCLICK???? */}
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}{navigate('/')}</p> }
-        {/* {successMessage && <p className="success-message">{successMessage}{navigate('/', { replace: true })}</p> } */}
+        {successMessage && <p className="success-message">{successMessage}{navigate('/', { replace: true })}</p> }
     {/* DO THIS WITH A LITTLE POP UP AND DISPLAY THE MESSAGE HERE & WITH AN OKAY BUTTON AND ONCLICK USE THE NAVIGATE TO REDIRECT!!!! */}
 
 
         <div>
-          <p>Don`t have an account? Register <Link to="/registration"> here </Link>. 
+          <p>Don`t have an account? Register <Link to="/registration" className='Link'> here </Link>. 
           ODER 2 Buttons verlinkt</p>
      {/* 2 Buttons see here: https://www.youtube.com/watch?v=8QgQKRcAUvM  */}
           <p>Forgot pasword?</p>

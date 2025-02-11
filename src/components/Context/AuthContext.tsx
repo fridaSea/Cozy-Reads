@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { User } from "../../types/customTypes";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../configuration/firebaseConfig";
+import { useNavigate } from "react-router";
 
 //3 Define providers props type
 type AuthContextProviderProps = {
@@ -12,7 +13,7 @@ type AuthContextProviderProps = {
 type AuthContextType = {
   user: User | null;
   registration: (email:string, password:string)=> Promise<void>
-  login: (email:string, password:string)=> Promise<void>
+  login: (email:string, password:string)=> Promise<boolean>
   logout: () => void;
 }
 
@@ -39,7 +40,6 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
   // }
 
   const [user, setUser] = useState<User | null>(null)
-
 
   const registration = async (email:string, password:string) => {
     console.log("email, password:>>", email, password);
@@ -83,16 +83,18 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
 
         if (userEmail && id) {
           setUser({email: userEmail, id});
+          return true
         }else {
+          // return false
           throw new Error ("Userinformation not found");
         }
-        
 
-        console.log("user logged in:>>", user);
+        // console.log("user logged in:>>", user);
 
       } catch (err) {
         const error = err as Error 
         console.log("error message:>>", error.message);
+        return false
       }
 
 

@@ -1,21 +1,26 @@
-import React, { FormEvent, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  FormEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Book } from "./typesHome";
 import CarouselRatio from "../../components/Carousel/Carousel";
 import FullWidthTextField from "../../components/Searchfield";
 // import Fetch from '../../components/Fetch/Fetch'
 import "./Home.css";
 import { AuthContext } from "../../components/Context/AuthContext";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import { Grid, Typography } from "@mui/joy";
 import { CardMedia } from "@mui/material";
 import { Link } from "react-router";
 
-type items = string;
+// type items = string;
 
 function Home() {
   // console.log("Home rendered");
-
 
   const book = "self";
   // self, computers / webdevelopment , Biography & Autobiography
@@ -29,7 +34,7 @@ function Home() {
   const [searchItem, setSearchItem] = useState("");
   const [filteredBooks, setFilteredBooks] = useState<Array<Book>>([]);
 
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   // const [filterValue, setFilterValue] = useState(""); // Filter für die Suche verwalten
 
@@ -106,20 +111,25 @@ function Home() {
   //         filteredData = data.filter((data)) =>
   //             data.items.volumeInfo.title.toLowerCase().includes(filter.toLowerCase())
   //     }
-console.log("userAgent", navigator.userAgent)
+  console.log("userAgent", navigator.userAgent);
   return (
     <>
       <div>
-      <h1>Welcome to Cozy Reads</h1>
-      
+        <h1>Welcome to Cozy Reads</h1>
+
         <p>Where stories feel like home.</p>
         <br />
         {user ? <p>Nice to have you here, {user?.userName}.</p> : " "}
-        {user ? <p>What would you like to read today, {user?.userName}?</p> : " "}
+        {user ? (
+          <p>What would you like to read today, {user?.userName}?</p>
+        ) : (
+          " "
+        )}
         <div>
           {" "}
-          {navigator.userAgent.includes("Pixel") &&<CarouselRatio data={data} /> }
-          {" "}
+          {navigator.userAgent.includes("Pixel") && (
+            <CarouselRatio data={data} />
+          )}{" "}
         </div>
       </div>
 
@@ -127,63 +137,70 @@ console.log("userAgent", navigator.userAgent)
       <div className="cards-container">
         <FullWidthTextField handleInputChange={handleInputChange} />
 
-      {filteredItems.length === 0 && filteredBooks !== "" ? (
-        <Typography variant="h5" component="div" sx={{color:'#e4a788', textAlign:'center', marginTop: '20px'}}>
-        No results found for "{filteredBooks}"
-        </Typography>
-      ) : (
-          <Grid container spacing={3} className="GridContainer">
-
-          
-          <Grid item xs={12} md={4} lg={3} >
-            {data && filteredItems.length > 0 ? (
-          filteredItems.map((book, index: number) => (
-
-          
-
-                
-            <Card variant="outlined" key={index} sx={{ maxWidth: 345,
-              marginTop: '10px',
-              borderRadius: "8px"
-              }}>
-               <CardMedia
-             component="img"
-             image={book.volumeInfo.imageLinks?.thumbnail}
-              alt={book.volumeInfo.title}
-              />
-              
-              <CardContent>
-              <Typography gutterBottom variant="h5" component="div" 
-              sx={{
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis"
-              }}>
-               <h3> {book.volumeInfo.title} </h3>
-               <p>{book.volumeInfo.subtitle}</p>
-               From: {book.volumeInfo.authors?.join(", ")}
-              </Typography>
-              </CardContent>
-
-
-              <div>
-                <button className='button'> 
-                <Link to="/bookdetail">read more</Link></button>
-            </div>
-
-            </Card>
-
-          ))
+        {filteredItems.length === 0 && filteredBooks !== "" ? (
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ color: "#e4a788", textAlign: "center", marginTop: "20px" }}
+          >
+            No results found for "{filteredBooks}"
+          </Typography>
         ) : (
-          <p>No Books found</p>
-        )}
+          <Grid container spacing={3} className="GridContainer">
+            <Grid item xs={12} md={4} lg={3}>
+              {data && filteredItems.length > 0 ? (
+                filteredItems.map((book, index: number) => (
+                  <Link to={`/books/${book.id}`} key={index}>
+                  
+                  
+                   <Card
+                    variant="outlined"
+                    
+                    sx={{
+                      maxWidth: 345,
+                      marginTop: "10px",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      image={book.volumeInfo.imageLinks?.thumbnail}
+                      alt={book.volumeInfo.title}
+                    />
 
-</Grid>
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        sx={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        <h3> {book.volumeInfo.title} </h3>
+                        <p>{book.volumeInfo.subtitle}</p>
+                        From: {book.volumeInfo.authors?.join(", ")}
+                      </Typography>
+                    </CardContent>
+
+                    <div>
+                      <button className="button">
+                      <Link to={`/books/${book.id}`} key={index}>
+                        Read more</Link>
+                      </button>
+                    </div>
+                  </Card>
+                  </Link>
+                 
+                ))
+              ) : (
+                <p>No Books found</p>
+              )}
+            </Grid>
           </Grid>
-      )
-      }
-
-        
+        )}
       </div>
     </>
   );
