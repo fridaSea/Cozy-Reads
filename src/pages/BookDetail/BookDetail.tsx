@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import {Book} from "../Home/typesHome"
-import "./BookDetail.css"
+import { useNavigate, useParams } from "react-router";
+import {Book} from "../Home/typesHome";
+import "./BookDetail.css";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import "../../index.css"
 
 // Not neccessary, because when it is a string, typescript does know it
 // type CrimeBook = string;
@@ -13,7 +17,16 @@ function removeHtmlTags(str: string) {
   return str.replace(/<[^>]*>/g, ""); // Alle HTML-Tags entfernen
 }
 
+// const ArrowBackIcon = () => {
+//   let navigate = useNavigate();
+//     return 
+// }
+
+
+
 function BookDetail() {
+  const navigate = useNavigate();
+  
   const { bookDetail } = useParams<{ bookDetail: string }>();
   console.log('bookDetail :>> ', bookDetail);
 
@@ -65,7 +78,6 @@ useEffect(() => {
   //  const dataUrlHash = data.replace(/<(.|\n)*?>/g, '');
   //   setData(data);
 
-
   // const descriptionUrlHash = document.location.hash;
   // const descriptionHash = decodeURI(descriptionUrlHash);
   // const description = descriptionHash.substring(1)
@@ -73,22 +85,22 @@ useEffect(() => {
 
 
     return (
-      <div>
        
-        <h1>Book Details</h1>
-    
+      <div>
+        <button className="backButton" onClick={() => navigate(-1)}> <ArrowBackRoundedIcon/> </button>
+
+        {/* <h1>Book Details</h1>
+     */}
         {loading ? (
       <p>Lade Buchdetails...</p>
     ) : data.length > 0 && data[0].volumeInfo ? (
-      <div>
-        <div>
+      <div className="topInformation">
+        <div >
         {/* Titel */}
         <h2>{data[0].volumeInfo.title}</h2>
         {/* Subtitel */}
         <h3>{data[0].volumeInfo.subtitle}</h3>
-        </div>
-        
-
+ 
         <img
           src={data[0].volumeInfo.imageLinks?.thumbnail}
           alt={data[0].volumeInfo.title}
@@ -101,14 +113,16 @@ useEffect(() => {
         <p className="titels">Verlag: </p>
         <p>{data[0].volumeInfo.publisher}</p>
         
+        </div>
 
         <hr></hr>
-
+        <div className="descriptionText">
         <h3>Description:</h3>
         <p>
           {/* {description} */}
         {data[0].volumeInfo.description ? removeHtmlTags(data[0].volumeInfo.description): "Keine Beschreibung verfügbar."}
         </p>
+        </div>
         
         <hr></hr>
         <div className="bottomInfos">
@@ -125,6 +139,7 @@ useEffect(() => {
     ) : (
       <p>Keine Details für dieses Buch verfügbar.</p>
     )}
+    <hr></hr>
       </div>
     );
 

@@ -1,0 +1,68 @@
+body{
+    margin: auto;
+}
+
+.bookImage{
+    margin: 25px 25px;
+    width: 200px;
+}
+
+hr{
+    width: 95%;
+    display:block;
+    margin:30px auto;
+}
+
+h2{
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.titels{
+    font-weight: bold;
+}
+
+.topInformation{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topInformation , .descriptionText {
+    text-align: center;
+}
+
+.descriptionText{
+    text-align: justify;
+    margin: 0 10%;
+}
+
+.bottomInfos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+}
+p{
+    margin-bottom: 2px;
+}
+
+.backButton{
+    background-color:transparent !important; 
+    margin-top: 0.5rem;
+    /* padding: 1rem; */
+    /* width: 25%; */
+    border: none;
+    font-size: 2rem;
+    /* height: 10px; */
+}
+
+
+
+
+/* Auf mobile ist der strich kürzer */
+@media (max-width:650px) {
+    hr{
+        width: 80%;
+    }
+}
