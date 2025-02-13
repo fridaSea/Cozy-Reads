@@ -7,7 +7,6 @@ import { User } from '../../types/customTypes';
 import { AuthContext } from '../Context/AuthContext';
 
 
-const pages = ['Home', 'Splash', 'Login', 'Favorites'];
 
 function Navbar() {
   //9 Subscribe to the context and use the elements available 
@@ -56,7 +55,7 @@ function Navbar() {
       <Box sx={{ flexGrow: 1 }}>
         <header className='header'>
           <div className='headerContent'>
-            <a href='#' className='logo'>Cozy Reads</a>
+            <a href='/' className='logo'>Cozy Reads</a>
 
           <nav className={"nav " + (isOpen ? 'nav--open' : '')} >
               <ul className='navList'>
@@ -78,10 +77,7 @@ function Navbar() {
                     <a href='./Login' className='navLink'>Login </a>
                   </li> */}
               </ul>
-              
-              
-            
-            </nav>
+          </nav>
             
 
             <div className='hamburgerMenu'

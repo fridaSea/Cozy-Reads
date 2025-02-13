@@ -2,13 +2,44 @@
 html, body {
   height: 100%;
   margin: 0;
+  /* overflow-x: hidden; */
 }
 
 body {
-  background-image: url('./assets/Background_weichzeichner.png');
+  padding-bottom: 3.5rem;
+}
+
+.background-image{
+  height: 100%;
+  position: fixed;
+  background-image: url(/src/assets/Background_weichzeichner.png);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.WebsiteContainer{
+   margin: 0px 5px; 
+   min-height: calc(100dvh - 60px - 3.5rem);
+}
+
+#header , #footer{
+  width:100%;
+  max-width: 100%;
+}
+
+.button {
+  margin: 5px;
+  padding: 50px;
+}
+
+@media(max-width: 650px) {
+  .WebsiteContainer{
+    padding-bottom: 3.5rem;
+    }
 }
 
 /* @media only screen and (max-width: 600px) {

@@ -20,8 +20,12 @@ import FAQ from './pages/FAQ/FAQ'
 const Root = () => {
     return (
       <>
+       <div className='background-image'></div>
        <Navbar/>
-       <Outlet/>
+       <div className='WebsiteContainer'>
+        <Outlet/>
+       </div>
+       
        <SimpleBottomNavigation/>
       </>
     )
