@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import {Book} from "../Home/typesHome"
+import "./BookDetail.css"
 
 // Not neccessary, because when it is a string, typescript does know it
 // type CrimeBook = string;
 // type SelfBook = string;
 // type items = string;
 
+// Funktion zum Entfernen von HTML-Tags
+function removeHtmlTags(str: string) {
+  return str.replace(/<[^>]*>/g, ""); // Alle HTML-Tags entfernen
+}
 
 function BookDetail() {
   const { bookDetail } = useParams<{ bookDetail: string }>();
@@ -49,6 +54,24 @@ useEffect(() => {
     });
 }, [BooksURL]);
 
+    // EXTRA <p> ELIMINIEREN TO DO 
+    // const dataUrlHash = document.location.hash;
+    // // console.log("dataUrlHash:>>", dataUrlHash)
+    // const dataHash = decodeURI(dataUrlHash);
+    // // console.log("dataHash:>>", dataHash)
+    // const dataBook = dataHash.substring(1);
+    // console.log("dataBook:>>", dataBook)
+
+  //  const dataUrlHash = data.replace(/<(.|\n)*?>/g, '');
+  //   setData(data);
+
+
+  // const descriptionUrlHash = document.location.hash;
+  // const descriptionHash = decodeURI(descriptionUrlHash);
+  // const description = descriptionHash.substring(1)
+  // console.log("description:>>",description)
+
+
     return (
       <div>
        
@@ -58,24 +81,46 @@ useEffect(() => {
       <p>Lade Buchdetails...</p>
     ) : data.length > 0 && data[0].volumeInfo ? (
       <div>
-        <h2>Titel: {data[0].volumeInfo.title}</h2>
-        <h3>Subtitel: {data[0].volumeInfo.subtitle}</h3>
+        <div>
+        {/* Titel */}
+        <h2>{data[0].volumeInfo.title}</h2>
+        {/* Subtitel */}
+        <h3>{data[0].volumeInfo.subtitle}</h3>
+        </div>
+        
 
         <img
           src={data[0].volumeInfo.imageLinks?.thumbnail}
           alt={data[0].volumeInfo.title}
-          style={{ maxWidth: "200px" }}
+          className="bookImage"
         />
         
-        <h3>Author(s):</h3>
+        <h4>Author(s):</h4>
         <p> {data[0].volumeInfo.authors?.join(", ")}</p>
+
+        <p className="titels">Verlag: </p>
+        <p>{data[0].volumeInfo.publisher}</p>
+        
+
+        <hr></hr>
 
         <h3>Description:</h3>
         <p>
-        {data[0].volumeInfo.description}
+          {/* {description} */}
+        {data[0].volumeInfo.description ? removeHtmlTags(data[0].volumeInfo.description): "Keine Beschreibung verfügbar."}
         </p>
-        <p>Verlag: {data[0].volumeInfo.publisher}</p>
-        <p>Veröffentlicht: {data[0].volumeInfo.publishedDate}</p>
+        
+        <hr></hr>
+        <div className="bottomInfos">
+          <div>
+            <p className="titels">Veröffentlicht: </p>
+            <p>{data[0].volumeInfo.publishedDate}</p>
+          </div>
+          <div>
+            <p className="titels">Pages: </p>
+            <p>{data[0].volumeInfo.pageCount}</p>
+          </div>
+        </div>
       </div>
     ) : (
       <p>Keine Details für dieses Buch verfügbar.</p>
