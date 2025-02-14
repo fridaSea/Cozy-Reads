@@ -2,14 +2,36 @@
     margin-top: 10px;
 }
 
-.button {
-    margin: 5px;
-    padding: 50px;
-    
+.read-more-button{
+    /* Button */
+    border-radius: 10px;
+    border-color: #5fe9e0;
+    padding: 1rem;
+    background-color: #5fe9e0;
+    text-align: center;
+    margin: 2% 35%;
 }
 
-.GridContainer {
-    justify-content: center;
-    align-items: center;
+.grid-container {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px 100px; */
+
 }
-   
+
+/* .clamped{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+} */
+
+@media(max-width: 650px) {
+    .grid-container{
+        justify-content: center;
+        align-items: center;
+      }
+  }

@@ -1,14 +1,12 @@
-import React, {
+import {
   FormEvent,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { Book } from "./typesHome";
 import CarouselRatio from "../../components/Carousel/Carousel";
 import FullWidthTextField from "../../components/Searchfield";
-// import Fetch from '../../components/Fetch/Fetch'
 import "./Home.css";
 import { AuthContext } from "../../components/Context/AuthContext";
 import Card from "@mui/material/Card";
@@ -16,13 +14,15 @@ import CardContent from "@mui/material/CardContent";
 import { Grid, Typography } from "@mui/joy";
 import { CardMedia } from "@mui/material";
 import { Link } from "react-router";
+import "../../App.css"
 
 // type items = string;
+
 
 function Home() {
   // console.log("Home rendered");
 
-  const book = "self";
+  const book = "nature";
   // self, computers / webdevelopment , Biography & Autobiography
   // Filtervorgaben: Categorie, Sprache, weniger/ mehr als 200 Seiten, (Published by year), publisher
 
@@ -134,6 +134,8 @@ function Home() {
       </div>
 
       <h1>Books List</h1>
+      
+  
       <div className="cards-container">
         <FullWidthTextField handleInputChange={handleInputChange} />
 
@@ -143,19 +145,20 @@ function Home() {
             component="div"
             sx={{ color: "#e4a788", textAlign: "center", marginTop: "20px" }}
           >
-            No results found for "{filteredBooks}"
+            No results found for "{searchItem}"
           </Typography>
         ) : (
-          <Grid container spacing={3} className="GridContainer">
-            <Grid item xs={12} md={4} lg={3}>
+          <Grid container spacing={2} >
+
               {data && filteredItems.length > 0 ? (
                 filteredItems.map((book, index: number) => (
-                  <Link to={`/books/${book.id}`} key={index}>
-                  
-                  
-                   <Card
+                  <Grid item xs={12} md={4} lg={3} className="grid-container">
+
+                    <Link to={`/books/${book.id}`} key={index}>
+                
+                    <Card
+                    className="card"
                     variant="outlined"
-                    
                     sx={{
                       maxWidth: 345,
                       marginTop: "10px",
@@ -173,12 +176,16 @@ function Home() {
                         gutterBottom
                         variant="h5"
                         component="div"
-                        sx={{
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
+                        // className="clamped"
+                        // sx={{
+                        //   whiteSpace: "nowrap",
+                        //   overflow: "hidden",
+                        //   textOverflow: "ellipsis",
+                        //   display: "block",
+                        //   lineClamp:"4",
+                        // }}
                       >
+
                         <h3> {book.volumeInfo.title} </h3>
                         <p>{book.volumeInfo.subtitle}</p>
                         From: {book.volumeInfo.authors?.join(", ")}
@@ -186,44 +193,25 @@ function Home() {
                     </CardContent>
 
                     <div>
-                      <button className="button">
+                      <button className="read-more-button">
                       <Link to={`/books/${book.id}`} key={index}>
                         Read more</Link>
                       </button>
                     </div>
-                  </Card>
-                  </Link>
-                 
+                    </Card>
+                    </Link>
+                  </Grid>
                 ))
               ) : (
                 <p>No Books found</p>
               )}
-            </Grid>
           </Grid>
         )}
+        
       </div>
+
     </>
   );
 }
-
-// TRY__
-// useEffect(() => {
-//     fetch(BooksURL)
-//     .then(response => response.json())
-//     .then (data => setData(data.items)
-//         // console.log("data:>>", data)
-// )
-//     .catch((error) => console.log('Fetch error: ', error))
-// }, [])
-
-// return (
-//     <>
-//     <div>
-// <h1>Moin</h1>
-
-//     </div>
-//     </>
-// )
-// ____ TRY ENDE
 
 export default Home;
