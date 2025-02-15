@@ -1,11 +1,8 @@
-import { AppBar, Box, Button, IconButton, Menu, MenuItem, MenuList, Toolbar, Typography } from '@mui/material';
-import { Link } from 'react-router';
+import { Box} from '@mui/material';
 import './Navbar.css'
 import MenuIcon from '@mui/icons-material/Menu'; 
 import { MouseEvent, useContext, useState } from 'react';
-import { User } from '../../types/customTypes';
 import { AuthContext } from '../Context/AuthContext';
-
 
 
 function Navbar() {
@@ -31,19 +28,19 @@ function Navbar() {
     
 // Navbar
   // const navElement = document.querySelector('.nav');
-  // const hamburgerMenuElement = document.querySelector('.hamburgerMenu');
+  // const hamburger-menu-element = document.querySelector('.hamburger-menu');
 
   const [click, setClick] = useState(false);
 
 
-  // hamburgerMenuElement.addEventListener("click", () => {
+  // hamburger-menu-element.addEventListener("click", () => {
   //   navElement.classList.toggle("nav--open");
-  //   hamburgerMenuElement?.classList.toggle("hamburger-open")
+  //   hamburger-menu-element?.classList.toggle("hamburger-open")
   // })
 
   // navElement?.addEventListener('click', () => {
   //   navElement.classList.remove("nav--open");
-  //   hamburgerMenuElement?.classList.remove("hamburger-open")
+  //   hamburger-menu-element?.classList.remove("hamburger-open")
   // })
 
   // const handleClickOnHamburger = (e:MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
@@ -54,33 +51,36 @@ function Navbar() {
   return (
       <Box sx={{ flexGrow: 1 }}>
         <header className='header'>
-          <div className='headerContent'>
+          <div className='header-content'>
             <a href='/' className='logo'>Cozy Reads</a>
 
           <nav className={"nav " + (isOpen ? 'nav--open' : '')} >
-              <ul className='navList'>
-                  <li className='navItem'>
-                    <a href='/' className='navLink'>Home </a>
+              <ul className='nav-list'>
+                  <li className='nav-item'>
+                    <a href='./favorites' className='nav-link'>Favorites </a>
                   </li>
-                  <li className='navItem'>
-                    <a href='./favorites' className='navLink'>Favorites </a>
+                  <li className='nav-item'>
+                    <a href='./forum' className='nav-link'>Weekly Question/ Chat </a>
+                  </li>
+                  <li className='nav-item'>
+                    <a href='./faq' className='nav-link'>FAQ </a>
                   </li>
                   <li>
                   {user ? (
-                    <a href='./Login' className='navLink' onClick={logout} color="inherit">Log out </a>
+                    <a href='./Login' className='nav-link' onClick={logout} color="inherit">Log out </a>
                   ) : (
-                    <a href='./Login' className='navLink' onClick={login} variant="danger">Login </a>
+                    <a href='./Login' className='nav-link' onClick={login} variant="danger">Login </a>
                   )
                   } 
                   </li>
-                   {/* <li className='navItem'>
-                    <a href='./Login' className='navLink'>Login </a>
+                   {/* <li className='nav-item'>
+                    <a href='./Login' className='nav-link'>Login </a>
                   </li> */}
               </ul>
           </nav>
             
 
-            <div className='hamburgerMenu'
+            <div className='hamburger-menu'
             //  onClick={() => setShowMenu(showMenu => !showMenu)}
             // onClick={() => console.log("click")}  -> funktioniert
              onClick={openMenu} 

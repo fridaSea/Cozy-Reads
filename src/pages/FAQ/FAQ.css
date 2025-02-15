@@ -1,0 +1,14 @@
+.question{
+    font-weight: bold;
+}
+
+.accordionDetails{
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.page-style{
+    text-align: block;
+    margin: 0 5%;
+}
