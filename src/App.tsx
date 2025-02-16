@@ -14,7 +14,7 @@ import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
 import { app, auth, db } from './configuration/firebaseConfig'
-import Forum from './pages/Forum/Forum'
+import Chat from './pages/Chat/Chat'
 import FAQ from './pages/FAQ/FAQ'
 
 const Root = () => {
@@ -22,7 +22,7 @@ const Root = () => {
       <>
        <div className='background-image'></div>
        <Navbar/>
-       <div className='WebsiteContainer'>
+       <div className='website-container'>
         <Outlet/>
        </div>
        
@@ -58,9 +58,9 @@ function App() {
             </ProtectedRoute>
             }/>
           <Route path="/books/:bookDetail" element={<BookDetail/>}/>
-          <Route path="/forum" element={
+          <Route path="/chat" element={
             <ProtectedRoute>
-                <Forum/>
+                <Chat/>
             </ProtectedRoute>
             }/>
           <Route path="*" element={<NoMatchPage/>}/>

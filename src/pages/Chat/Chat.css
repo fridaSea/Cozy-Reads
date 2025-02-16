@@ -1,0 +1,50 @@
+p{
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+} 
+
+.chat-card{
+    border: 2px dotted;
+    background-color: transparent !important;
+    padding: 5px 10px;
+    margin: 10px 5px;
+    border-radius: 15px !important; 
+}
+
+.card{
+    border: 2px solid;
+    border-radius: 15px !important; 
+    width: 15rem;
+}
+
+.my-message {
+    background-color: rgb(230, 230, 230) !important; /* Optional: Hintergrund für eigene Nachrichten */
+    margin-left: auto; /* Zeigt die Nachrichten rechts an */
+    text-align: right;
+}
+
+.other-message {
+    margin-right: auto; /* Zeigt die Nachrichten links an */
+    text-align: left;
+}
+
+.message-box{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+ 
+}
+
+.MuiTextField-root{
+    width: 95% !important;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.message-button{
+    height: 46px;
+    width: 20%;
+    text-align: center;
+    margin: 14px 5px !important;
+}
