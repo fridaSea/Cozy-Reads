@@ -25,12 +25,12 @@ const {registration} = useContext(AuthContext);
 //   setUsername(e.target.value)
 //  }
 
- const handleSubmitRegistration = (e: FormEvent<HTMLFormElement>) => {
+ const handleSubmitRegistration = async (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   // this is going to prefent the form from refreshing the page when submittet
   // console.log("email, password, username:>>", email, password, username)
   registration(email, password);
- }
+ } 
 
 // everything that was set before adding the Authentication until the return part
   const navigate = useNavigate();
@@ -68,7 +68,8 @@ const {registration} = useContext(AuthContext);
   //        }, 1000); 
 
   return (
-    <div className="form-container">
+    <div className='form-container-wrapper'>
+      <div className="form-container">
       <h2>Registration</h2>
       <form className="registration-form" onSubmit={handleSubmitRegistration}>
         {/* <div className="form-group">
@@ -133,13 +134,13 @@ const {registration} = useContext(AuthContext);
 
 
         <div>
-          <p>Already have an account? Login <Link to="/login"> here </Link> . 
-          
-        ODER 2 Buttons verlinkt</p>
+          <p>Already have an account? Login <Link to="/login" className='Link' > here </Link>
+          </p>
      {/* 2 Buttons see here: https://www.youtube.com/watch?v=8QgQKRcAUvM  */}
           
         </div>
       </form>
+    </div>
     </div>
   );
 };

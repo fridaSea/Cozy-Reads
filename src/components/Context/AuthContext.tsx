@@ -43,14 +43,21 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
 
   const registration = async (email:string, password:string) => {
     console.log("email, password:>>", email, password);
-
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       // Signed up 
-
       const user = userCredential.user;
-      
-      console.log("user registered:>>", user);
+        const userEmail = user.email;
+        const id = user.uid;
+
+        if (userEmail && id) {
+          setUser({email: userEmail, id});
+          return true
+        }else {
+          // return false
+          throw new Error ("Userinformation not found");
+        }
+     
 
     } catch (err) {
       const error = err as Error 
