@@ -1,46 +1,51 @@
 import { Box} from '@mui/material';
 import './Navbar.css'
-import MenuIcon from '@mui/icons-material/Menu'; 
 import { MouseEvent, useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
+import { NavLink } from 'react-router';
 
 
 function Navbar() {
   //9 Subscribe to the context and use the elements available 
   const {user, login, logout} = useContext(AuthContext)
-
   const [anchorNav, setAnchorNav] = useState<null | HTMLElement>(null);
-  const openMenu = (event:MouseEvent<HTMLElement>) => {
-    //setAnchorNav(event.currentTarget);
-    if(isOpen){
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-    //setIsOpen(!isOpen)
 
-  };
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const openMenu = () => {
+    setIsOpen(!isOpen);
+  }
+
+  // const openMenu = (event:MouseEvent<HTMLElement>) => {
+  //   //setAnchorNav(event.currentTarget);
+  //   if(isOpen){
+  //     setIsOpen(false);
+  //   } else {
+  //     setIsOpen(true);
+  //   }
+  //   //setIsOpen(!isOpen)
+
+  // };
+  
 
   // const closeMenu = (event:MouseEvent<HTMLElement>) => {
   //   setAnchorNav(null);
   // };
     
 // Navbar
-  // const navElement = document.querySelector('.nav');
-  // const hamburger-menu-element = document.querySelector('.hamburger-menu');
+  const navElement = document.querySelector('.nav');
+  const hamburgerMenuElement = document.querySelector('.hamburger-menu');
 
   const [click, setClick] = useState(false);
 
 
-  // hamburger-menu-element.addEventListener("click", () => {
+  // hamburgerMenuElement.addEventListener("click", () => {
   //   navElement.classList.toggle("nav--open");
-  //   hamburger-menu-element?.classList.toggle("hamburger-open")
+  //   hamburgerMenuElement?.classList.toggle("hamburger-open")
   // })
 
   // navElement?.addEventListener('click', () => {
   //   navElement.classList.remove("nav--open");
-  //   hamburger-menu-element?.classList.remove("hamburger-open")
+  //   hamburgerMenuElement?.classList.remove("hamburger-open")
   // })
 
   // const handleClickOnHamburger = (e:MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
@@ -56,31 +61,48 @@ function Navbar() {
 
           <nav className={"nav " + (isOpen ? 'nav--open' : '')} >
               <ul className='nav-list'>
-                  <li className='nav-item'>
-                    <a href='./favorites' className='nav-link'>Favorites </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a href='./forum' className='nav-link'>Weekly Question/ Chat </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a href='./faq' className='nav-link'>FAQ </a>
-                  </li>
-                  <li>
+                <li className='nav-item'>
+                  <NavLink 
+                  to='/faq' 
+                  className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'}>
+                    FAQ</NavLink>
+                </li>
+                    
+                <li className='nav-item'>
+                  <NavLink 
+                    to="/chat"
+                    className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'}
+                    >Chat
+                  </NavLink>
+                </li>
+                  
+
+                <li className='nav-item'>
+                 
                   {user ? (
-                    <a href='./Login' className='nav-link' onClick={logout} color="inherit">Log out </a>
+                    <NavLink to='/Login' className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} onClick={logout} color="inherit">Log out </NavLink>
                   ) : (
-                    <a href='./Login' className='nav-link' onClick={login} variant="danger">Login </a>
+                    <NavLink to='/Login' className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} onClick={login} variant="danger">Login </NavLink>
                   )
                   } 
                   </li>
+
+                  {/* <li className='nav-item'>
+                  {user ? (
+                    <a href='/Login' className='nav-link' onClick={logout} color="inherit">Log out </a>
+                  ) : (
+                    <a href='/Login' className='nav-link' onClick={login} variant="danger">Login </a>
+                  )
+                  } 
+
                    {/* <li className='nav-item'>
-                    <a href='./Login' className='nav-link'>Login </a>
+                    <a href='./favorites' className='nav-link'>Favorites </a>
                   </li> */}
               </ul>
           </nav>
             
 
-            <div className='hamburger-menu'
+            <div className={`hamburger-menu ${isOpen ? 'hamburger-menu--open' : ''}`}
             //  onClick={() => setShowMenu(showMenu => !showMenu)}
             // onClick={() => console.log("click")}  -> funktioniert
              onClick={openMenu} 
