@@ -1,11 +1,20 @@
-.bottomNavigation{
+.bottom-navigation{
    position: fixed !important;
    bottom: 0 !important;
    width: 100%;
    height: 3.5rem;
 }
 
-.Footer {
+.css-7ax0nd-MuiBottomNavigation-root{
+   background-color: black !important;
+}
+
+.Mui-selected{
+   color: #fff;
+   /* color: #5fe9e0; */
+}
+
+.footer {
    width: 100%;
    display: flex;
    gap: 105px;
@@ -19,14 +28,19 @@ img{
  height:25%
 }
 
+.action-icon{
+   color: #fff;
+   /* color:#5fe9e0 */
+}
+
 @media(max-width: 650px) {
-   .Footer{
+   .footer{
       display: none;
      }
 }
 
 @media (min-width:650px) {
-  .bottomNavigation{
+  .bottom-navigation{
    display: none;
 }
 }

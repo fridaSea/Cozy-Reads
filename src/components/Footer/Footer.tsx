@@ -1,20 +1,16 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HomeIcon from '@mui/icons-material/Home';
 import SurfingIcon from '@mui/icons-material/Surfing';
 import AccountBoxIcon from '@mui/icons-material/AccountBox'; 
-import { Link, useNavigate } from 'react-router';
-import Home from '../../pages/Home/Home'
+import { useNavigate } from 'react-router';
 import  './Footer.css';
 import facebook from '../../assets/facebook.png';
 import instagram from '../../assets/instagram.png';
 import tiktok from '../../assets/tiktok.png';
-import youtube from '../../assets/youtube.png';
+import ChatIcon from '@mui/icons-material/Chat';
 
 function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
@@ -23,7 +19,8 @@ function SimpleBottomNavigation() {
   return (
       <div>
 {/* MOBILE FOOTER */}
-      <Box className='bottomNavigation'>
+      <div className='bottom-navigation'>
+
         <BottomNavigation 
           showLabels
           value={value}
@@ -31,24 +28,27 @@ function SimpleBottomNavigation() {
             setValue(newValue) ;
           }}
         >
-        <BottomNavigationAction className='bottomNavigationAction'
+        <BottomNavigationAction className='bottom-navigation-action'
             label="Home" 
             value={value}
             onClick={() =>navigate("/")
             }
-            icon={<HomeIcon />}
+            icon={<HomeIcon className='action-icon'/>}
             // component={Link} 
             // to={'../../pages/Home/Home'}  
              />
+        <BottomNavigationAction label="Chat" value={value} onClick={() =>navigate("/chat")
+            } icon={<ChatIcon className='action-icon'/>} />
+        </BottomNavigation>
         {/* <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Buy us a surf break" icon={<SurfingIcon />} /> */}
-        <BottomNavigationAction label="Profil" value={value} onClick={() =>navigate("/login")
-            } icon={<AccountBoxIcon />} />
-        </BottomNavigation>
-      </Box>
+        {/* <BottomNavigationAction label="Profil" value={value} onClick={() =>navigate("/login")
+            } icon={<AccountBoxIcon className='action-icon'/>} />
+        </BottomNavigation> */}
+      </div>
 
 {/* DESKTOP FOOTER */}
-    <div className='Footer'>
+    <div className='footer'>
          <span className="copyright"> Mady with Love by _frida_sea_ &copy; 2025</span>
       
 
