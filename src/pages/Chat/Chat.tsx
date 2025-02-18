@@ -144,7 +144,7 @@ function Chat() {
                   {message.author}
         </Typography>
         {/* Datum */}
-        <Typography gutterBottom variant="p" component="div">
+        <Typography gutterBottom variant="body2" component="div">
             {formatDate(message.date.seconds)}
         </Typography>
         {/* Message */}

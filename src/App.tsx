@@ -49,11 +49,11 @@ function App() {
           <Route path="/registration" element={<Registration/>}/>
           <Route path="/splash" element={<Splash/>}/>
           <Route path="/faq" element={<FAQ/>}/>
-          <Route path="/favorites" element={ 
+          {/* <Route path="/favorites" element={ 
             <ProtectedRoute>
-                {/* <Favorites/> */}
+                <Favorites/>
             </ProtectedRoute>
-            }/>
+            }/> */}
           <Route path="/books/:bookDetail" element={<BookDetail/>}/>
           <Route path="/chat" element={
             <ProtectedRoute>
