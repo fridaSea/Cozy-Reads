@@ -28,12 +28,12 @@ p{
 .other-message {
     margin-right: auto; /* Zeigt die Nachrichten links an */
     text-align: left;
+    justify-content: left;  
 }
 
 .message-box{
     display: grid;
     grid-template-columns: 4fr 1fr;
- 
 }
 
 .MuiTextField-root{
@@ -47,4 +47,10 @@ p{
     width: 20%;
     text-align: center;
     margin: 14px 5px !important;
+}
+
+@media (max-width:650px) {
+    .other-message{
+        margin-left: 0;
+    }
 }

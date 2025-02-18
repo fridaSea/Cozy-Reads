@@ -1,5 +1,53 @@
+.carousel-container{
+    margin-bottom: 25px;
+}
+
+.box-container {
+    display: flex;
+    /* py: 1; */
+    overflow-x:auto;
+    width: 100%;
+    padding: 0 10px;
+    gap:10px;
+}
+
+.carousel-cards{
+    /* max-width:85%; */
+    background-color:transparent !important;
+    min-width:50%;
+    height: 15rem;
+    display: flex;            /* Flexbox-Layout verwenden */
+    flex-direction: column;
+    
+      /* Bild oben, Text unten */
+    /* display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; */
+}
+
+.card-image{
+    width: 100%;              /* Das Bild nimmt die volle Breite der Karte ein */
+    object-fit: cover;        /* Stellt sicher, dass das Bild die Box ausfüllt, ohne das Seitenverhältnis zu verzerren */
+    height: 60%;              /* Das Bild nimmt 60% der Höhe der Karte ein */
+}
+
+.carousel-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* .carousel-box , .carousel-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+} */
+
+
 @media screen and (min-width: 500px ) {
-    .CarouselCards{
+    .carousel-cards{
         display: none;
     } 
 }

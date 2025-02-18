@@ -1,6 +1,5 @@
 import { Button } from '@mui/material';
-import { ChangeEvent, FormEvent, useContext, useState } from 'react';
-// import './Login.css'; 
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from '../../components/Context/AuthContext';
 
@@ -10,8 +9,10 @@ const {registration} = useContext(AuthContext);
 
  const [email, setEmail] = useState("")
  const [password, setPassword] = useState("")
-//  const [username, setUsername] = useState("")
-//  const [confirmPassword, setConfirmPassword] = useState("")
+ const [errorMessage, setErrorMessage] = useState('');
+ const [successMessage, setSuccessMessage] = useState('');
+ // everything that was set before adding the Authentication until the return part
+ const navigate = useNavigate();
 
  const handleEmailChange = (e:ChangeEvent<HTMLInputElement>) => {
   setEmail(e.target.value)
@@ -21,69 +22,27 @@ const {registration} = useContext(AuthContext);
   setPassword(e.target.value)
  }
 
-//  const handleUsernameChange = (e:ChangeEvent<HTMLInputElement>) => {
-//   setUsername(e.target.value)
-//  }
-
  const handleSubmitRegistration = async (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   // this is going to prefent the form from refreshing the page when submittet
-  // console.log("email, password, username:>>", email, password, username)
+  // console.log("email, password:>>", email, password)
   registration(email, password);
+  setSuccessMessage("Registration successful!");
  } 
 
-// everything that was set before adding the Authentication until the return part
-  const navigate = useNavigate();
+ useEffect(() => {
+  if (successMessage) {
+    // Hier wird die Navigation nach einer erfolgreichen Registrierung gemacht
+    navigate('/', { replace: true });
+  }
+}, [successMessage, navigate]);
 
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   email: '',
-  //   password: '',
-  //   confirmPassword: '',
-  // });
- 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-
-    // Auskommentiert, da wir diese Funktion bei der Authentication noch einmal neu definiert haben 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
-  // Auskommentiert, da wir diese Funktion bei der Authentication noch einmal neu definiert haben 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (formData.password !== formData.confirmPassword) {
-  //     setErrorMessage('Passwords do not match!');
-  //     setSuccessMessage('');
-  //   } else {
-  //     setErrorMessage('');
-  //     setSuccessMessage('Registration Successful!');
-  //     setTimeout(() => {
-  //         navigate('/home');
-  //        }, 1000); 
 
   return (
     <div className='form-container-wrapper'>
       <div className="form-container">
       <h2>Registration</h2>
       <form className="registration-form" onSubmit={handleSubmitRegistration}>
-        {/* <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-            // onChange={handleChange}
-            required
-          />
-        </div> */}
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -111,39 +70,24 @@ const {registration} = useContext(AuthContext);
           />
         </div>
 
-{/* ERST EINMAL RAUSGENOMMEN, DA ICH NICHT MEHR IN DAS FELD SCHREIBEN KONNTE */}
-        {/* <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={confirmPassword}
-            // onChange={handleChange}
-            required
-          />
-        </div> */}
         <div>
           <Button type="submit">Register</Button>
         </div>
 {/* BUTTON EINFÜGEN, STYLEN UND NICHT ONCLICK???? */}
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}{navigate('/home', { replace: true })}</p> }
+        {successMessage && <p className="success-message">{successMessage}</p>}
     {/* DO THIS WITH A LITTLE POP UP AND DISPLAY THE MESSAGE THER & WITH AN OKAY BUTTON AND ONCLICK USE THE NAVIGATE TO REDIRECT!!!! */}
-
 
         <div>
           <p>Already have an account? Login <Link to="/login" className='Link' > here </Link>
           </p>
-     {/* 2 Buttons see here: https://www.youtube.com/watch?v=8QgQKRcAUvM  */}
           
         </div>
       </form>
     </div>
     </div>
-  );
-};
-
+  )
+}
 
 export default Registration 

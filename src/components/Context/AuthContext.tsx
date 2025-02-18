@@ -2,7 +2,6 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { User } from "../../types/customTypes";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../configuration/firebaseConfig";
-import { useNavigate } from "react-router";
 
 //3 Define providers props type
 type AuthContextProviderProps = {
@@ -12,8 +11,8 @@ type AuthContextProviderProps = {
 //5 Define the type for the context
 type AuthContextType = {
   user: User | null;
-  registration: (email:string, password:string)=> Promise<void>
-  login: (email:string, password:string)=> Promise<boolean>
+  registration: (email:string, password:string)=> Promise<boolean>;
+  login: (email:string, password:string)=> Promise<boolean>;
   logout: () => void;
 }
 
@@ -41,7 +40,7 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
 
   const [user, setUser] = useState<User | null>(null)
 
-  const registration = async (email:string, password:string) => {
+  const registration = async (email:string, password:string) : Promise<boolean> => {
     console.log("email, password:>>", email, password);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
@@ -62,6 +61,7 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
     } catch (err) {
       const error = err as Error 
       console.log("error message:>>", error.message);
+      return false;
     }
 
     //  WITHOUT ASYCN AWAIT -> Async Await siehe oben drüber 

@@ -12,7 +12,8 @@ body {
 .background-image{
   height: 100%;
   position: fixed;
-  background-image: url(/src/assets/Background_weichzeichner.png);
+  background-image: url(/src/assets/Background.png);
+  /* background-image: url(/src/assets/Background_weichzeichner.png); */
   background-size: cover;
   background-position: center;
   top: 0%;
@@ -21,7 +22,7 @@ body {
   z-index: -1;
 }
 
-.WebsiteContainer{
+.website-container{
    margin: 0px 5px; 
    min-height: calc(100dvh - 60px - 3.5rem);
 }
@@ -37,7 +38,7 @@ body {
 }
 
 @media(max-width: 650px) {
-  .WebsiteContainer{
+  .website-container{
     padding-bottom: 3.5rem;
     }
 }

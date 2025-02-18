@@ -1,5 +1,35 @@
+.subtitle{
+  font-size: 16px;
+}
+
+.authors{
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .card {
     margin-top: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1; /* Stellt sicher, dass jede Karte gleich wächst */
+    border-color: rgb(207, 207, 207) !important;
+    /* margin-top: 10px;
+    max-width: 34;
+    margin-top: 10px; */
+}
+
+.card .MuiCardContent-root{
+    flex-grow: 1; /* Stellt sicher, dass der Textbereich den restlichen Platz einnimmt */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Macht sicher, dass der Button immer am unteren Rand bleibt */
+}
+
+.card img{
+    object-fit: cover;
+    height: 200px; /* Hier kannst du die Höhe des Bildes anpassen */
 }
 
 .read-more-button{
@@ -9,18 +39,41 @@
     padding: 1rem;
     background-color: #5fe9e0;
     text-align: center;
-    margin: 2% 35%;
+    margin: 0 35px 10px;
+    width: 70%;
 }
 
-.grid-container {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 100px 100px 100px; */
-
+.no-books-found{
+  padding-left: 20px;
 }
+
+@media (max-width: 650px) {
+    .card {
+      flex-direction: column;
+      margin-left: 20%;
+    }
+  
+    .read-more-button {
+      width: 80%; /* Auf mobilen Geräten den Button breiter machen */
+      margin: 5px 10% 10px;
+      text-align: center;
+    }
+  
+    .card img {
+      height: 150px; /* Bildhöhe für mobile Geräte anpassen */
+    }
+  }
+  
+  /* Desktop Anpassungen */
+  @media (min-width: 1200px) {
+    .card {
+      max-width: 350px; /* Maximalbreite für Desktop */
+    }
+  }
+
+/* .clamped{
+    height: 70%;
+} */
 
 /* .clamped{
     overflow: hidden;
@@ -29,9 +82,9 @@
     -webkit-box-orient: vertical; 
 } */
 
-@media(max-width: 650px) {
+/* @media(max-width: 650px) {
     .grid-container{
         justify-content: center;
         align-items: center;
       }
-  }
+  } */

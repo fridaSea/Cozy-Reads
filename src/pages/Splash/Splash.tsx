@@ -1,6 +1,6 @@
 import './Splash.css'
 import '../../index.css'
-import { Button, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import Logo from '../../assets/Logo_round.png'
 import { Link } from 'react-router'
 // import Logo from '../../assets/Logo.png'

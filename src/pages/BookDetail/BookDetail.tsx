@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import {Book} from "../Home/typesHome";
 import "./BookDetail.css";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import "../../index.css"
 
@@ -87,14 +85,14 @@ useEffect(() => {
     return (
        
       <div>
-        <button className="backButton" onClick={() => navigate(-1)}> <ArrowBackRoundedIcon/> </button>
+        <button className="back-button" onClick={() => navigate(-1)}> <ArrowBackRoundedIcon/> </button>
 
         {/* <h1>Book Details</h1>
      */}
         {loading ? (
       <p>Lade Buchdetails...</p>
     ) : data.length > 0 && data[0].volumeInfo ? (
-      <div className="topInformation">
+      <div className="top-information">
         <div >
         {/* Titel */}
         <h2>{data[0].volumeInfo.title}</h2>
@@ -104,7 +102,7 @@ useEffect(() => {
         <img
           src={data[0].volumeInfo.imageLinks?.thumbnail}
           alt={data[0].volumeInfo.title}
-          className="bookImage"
+          className="book-image"
         />
         
         <h4>Author(s):</h4>
@@ -116,7 +114,7 @@ useEffect(() => {
         </div>
 
         <hr></hr>
-        <div className="descriptionText">
+        <div className="description-text">
         <h3>Description:</h3>
         <p>
           {/* {description} */}
@@ -125,7 +123,7 @@ useEffect(() => {
         </div>
         
         <hr></hr>
-        <div className="bottomInfos">
+        <div className="bottom-infos">
           <div>
             <p className="titels">Veröffentlicht: </p>
             <p>{data[0].volumeInfo.publishedDate}</p>
@@ -139,7 +137,7 @@ useEffect(() => {
     ) : (
       <p>Keine Details für dieses Buch verfügbar.</p>
     )}
-    <hr></hr>
+    {/* <hr></hr> */}
       </div>
     );
 

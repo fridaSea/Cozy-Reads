@@ -1,10 +1,7 @@
 import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
-import SurfingIcon from '@mui/icons-material/Surfing';
-import AccountBoxIcon from '@mui/icons-material/AccountBox'; 
 import { useNavigate } from 'react-router';
 import  './Footer.css';
 import facebook from '../../assets/facebook.png';
@@ -34,8 +31,6 @@ function SimpleBottomNavigation() {
             onClick={() =>navigate("/")
             }
             icon={<HomeIcon className='action-icon'/>}
-            // component={Link} 
-            // to={'../../pages/Home/Home'}  
              />
         <BottomNavigationAction label="Chat" value={value} onClick={() =>navigate("/chat")
             } icon={<ChatIcon className='action-icon'/>} />
@@ -61,7 +56,7 @@ function SimpleBottomNavigation() {
       </div>
 
   </div>
-  );
+  )
 }
 
 export default SimpleBottomNavigation

@@ -1,26 +1,38 @@
-import {
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { Book } from "./typesHome";
 import CarouselRatio from "../../components/Carousel/Carousel";
 import FullWidthTextField from "../../components/Searchfield";
-import "./Home.css";
 import { AuthContext } from "../../components/Context/AuthContext";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Grid, Typography } from "@mui/joy";
-import { CardMedia } from "@mui/material";
+import { Box, CardMedia} from "@mui/material";
+import Grid from '@mui/material/Grid';
 import { Link } from "react-router";
-import "../../App.css"
+import Typography from '@mui/material/Typography';
+
+import "./Home.css";
+import "../../App.css";
 
 // type items = string;
+
+// Funktion zum Entfernen von HTML-Tags
+// function removeHtmlTags(str: string) {
+//   return str.replace(/<[^>]*>/g, ""); // Alle HTML-Tags entfernen
+// }
+
+// declare module '@mui/material/Typography' {
+//   interface TypographyPropsVariantOverrides {
+//     h5: true; // oder den Typ der gewünschten Variante anpassen
+//   }
+// }
 
 
 function Home() {
   // console.log("Home rendered");
+  
+  // const Api_Key = import.meta.env.REACT_APP_API_KEY;
+  // const Api_Key = process.env.REACT_APP_API_KEY;
+  // console.log(Api_Key);
 
   const book = "nature";
   // self, computers / webdevelopment , Biography & Autobiography
@@ -29,12 +41,13 @@ function Home() {
   // statt "description" untern, könnte ich auch nutzen: aus der API. "searchInfo": {"textSnippet"  ... und die description in die Details Page packen
 
   const BooksURL: string = `https://www.googleapis.com/books/v1/volumes?q=${book}`;
+  // const BooksURL: string = `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${Api_Key}`;
 
   const [data, setData] = useState<Array<Book>>([]);
   const [searchItem, setSearchItem] = useState("");
   const [filteredBooks, setFilteredBooks] = useState<Array<Book>>([]);
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   // const [filterValue, setFilterValue] = useState(""); // Filter für die Suche verwalten
 
@@ -46,7 +59,7 @@ function Home() {
         return response.json();
       })
       .then((data: { items: Array<Book> }) => {
-        console.log("data:>>", data);
+        // console.log("data:>>", data);  -> GERNE WIEDER AKTIVIEREN ZUM WEITERARBEITEN TO DO 
         // console.log("Title:>>", items.volumeInfo.title)
         setData(data.items); //Setzt die rohen Daten
         // setFilteredBooks(data.items);  // Anfangs zeigt man alle Bücher an ????? WARUM WIRD DAS HIER MIT REIN GEGEBEN???
@@ -59,7 +72,6 @@ function Home() {
   }, []);
 
   // // Filter / Search
-
   const handleInputChange = (e: FormEvent<HTMLDivElement>) => {
     // console.log("asdasdasdasd");
     const target = e.target as HTMLInputElement;
@@ -82,36 +94,7 @@ function Home() {
   });
   // setFilteredBooks(filteredItems);
 
-  // ALT ALT ALT ALT
-  // let author = book.volumeInfo.authors.toString()
-
-  //  console.log(authors);
-
-  // const filteredBooks = useMemo (() => {
-  //     return data.filter(book => author.toLowerCase().includes(filterValue.toLowerCase() ));
-  //   }, [data, filterValue])
-
-  // const handleFilterChange = (e, filterValue) => {
-  //   setFilterValue(e.target.value);
-  // };
-
-  // let filteredBooks = [];
-  //   if (data) {
-  //     filteredBooks = data.filter((data) =>
-  //         book.volumeInfo.authors.toLowerCase().includes(filter.toLowerCase())
-  //     );
-  //   }
-
-  // !!!!!! ANWENDEN setDataCrimi(crimi.data.items);
-  // setDataDrama(drama.data.items) … !!!!!!!!!!!!!
-
-  // Filter anwenden
-  // let filteredData = [];
-  //     if (data) {
-  //         filteredData = data.filter((data)) =>
-  //             data.items.volumeInfo.title.toLowerCase().includes(filter.toLowerCase())
-  //     }
-  console.log("userAgent", navigator.userAgent);
+  
   return (
     <>
       <div>
@@ -119,12 +102,12 @@ function Home() {
 
         <p>Where stories feel like home.</p>
         <br />
-        {user ? <p>Nice to have you here, {user?.userName}.</p> : " "}
+        {/* {user ? <p>Nice to have you here, {user?.userName}.</p> : " "}
         {user ? (
           <p>What would you like to read today, {user?.userName}?</p>
         ) : (
           " "
-        )}
+        )} */}
         <div>
           {" "}
           {navigator.userAgent.includes("Pixel") && (
@@ -133,13 +116,13 @@ function Home() {
         </div>
       </div>
 
-      <h1>Books List</h1>
+      <h1>All about "Nature" </h1>
       
   
       <div className="cards-container">
         <FullWidthTextField handleInputChange={handleInputChange} />
 
-        {filteredItems.length === 0 && filteredBooks !== "" ? (
+        {filteredItems.length === 0 && filteredBooks.length > 0 ? (
           <Typography
             variant="h5"
             component="div"
@@ -148,70 +131,70 @@ function Home() {
             No results found for "{searchItem}"
           </Typography>
         ) : (
-          <Grid container spacing={2} >
+          <Box>
+            <Grid container spacing={2}>
 
-              {data && filteredItems.length > 0 ? (
+              {
+              // data && 
+              filteredItems.length > 0 ? (
                 filteredItems.map((book, index: number) => (
-                  <Grid item xs={12} md={4} lg={3} className="grid-container">
-
-                    <Link to={`/books/${book.id}`} key={index}>
-                
-                    <Card
-                    className="card"
-                    variant="outlined"
-                    sx={{
-                      maxWidth: 345,
-                      marginTop: "10px",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      image={book.volumeInfo.imageLinks?.thumbnail}
-                      alt={book.volumeInfo.title}
-                    />
-
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        // className="clamped"
-                        // sx={{
-                        //   whiteSpace: "nowrap",
-                        //   overflow: "hidden",
-                        //   textOverflow: "ellipsis",
-                        //   display: "block",
-                        //   lineClamp:"4",
-                        // }}
+                  <Grid item xs={12} md={4} lg={3} className="grid-container" key={index}>
+                      <Link to={`/books/${book.id}`}>
+                  
+                      <Card
+                      className="card"
+                      variant="outlined"
                       >
+                        <CardMedia
+                          component="img"
+                          image={book.volumeInfo.imageLinks?.thumbnail}
+                          alt={book.volumeInfo.title}
+                        />
 
-                        <h3> {book.volumeInfo.title} </h3>
-                        <p>{book.volumeInfo.subtitle}</p>
-                        From: {book.volumeInfo.authors?.join(", ")}
-                      </Typography>
-                    </CardContent>
+                        <CardContent sx={{ flexGrow: 1, height:'100%'}}>
+                          <Typography
+                            gutterBottom
+                            variant="h5"
+                            component="div"
+                            // className="clamped"
+                            // sx={{
+                            //   whiteSpace: "nowrap",
+                            //   overflow: "hidden",
+                            //   textOverflow: "ellipsis",
+                            //   display: "block",
+                            //   lineClamp:"4",
+                            // }}
+                          >
 
-                    <div>
-                      <button className="read-more-button">
-                      <Link to={`/books/${book.id}`} key={index}>
-                        Read more</Link>
-                      </button>
-                    </div>
-                    </Card>
-                    </Link>
+                            <h4> {book.volumeInfo.title} </h4>
+                            <p className="subtitle">{book.volumeInfo.subtitle}</p>
+                            <p className="authors">From: {book.volumeInfo.authors?.join(", ")}</p>
+                            
+                          </Typography>
+                        </CardContent>
+
+                        <div>
+                          <button className="read-more-button">
+                          <Link to={`/books/${book.id}`} key={index}>
+                            Read more</Link>
+                          </button>
+                        </div>
+                      </Card>
+                      </Link>
                   </Grid>
                 ))
               ) : (
-                <p>No Books found</p>
+                <div>
+                <br></br>
+                <p className="no-books-found"> No Book found</p>
+                </div>
               )}
           </Grid>
-        )}
-        
+          </Box>
+        )} 
       </div>
-
     </>
-  );
+  )
 }
 
 export default Home;

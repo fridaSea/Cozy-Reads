@@ -35,7 +35,7 @@ a {
 
 .nav{
     transition: all 0.3s ease-in-out;
-    transform: translateX(100%);
+    /* transform: translateX(100%); */
     transition: transform 0.3s ease-in-out; 
 }
 
@@ -99,7 +99,7 @@ a {
         background-color: rgb(19, 22, 26);  
         width: 100%;
         padding: 10px 0 25px;
-        /* transform: translateX(100%); */
+        transform: translateX(100%);
     }
 
     .nav-list{
