@@ -1,9 +1,9 @@
-import { Typography } from '@mui/joy'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Stack } from '@mui/material'
+import Typography from '@mui/material/Typography';
+import { Accordion, AccordionDetails, AccordionSummary, Stack } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import './FAQ.css'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import MailIcon from '@mui/icons-material/Mail';
+
 
 function FAQ() {
   return (

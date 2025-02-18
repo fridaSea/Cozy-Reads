@@ -21,9 +21,9 @@ function SimpleBottomNavigation() {
         <BottomNavigation 
           showLabels
           value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue) ;
-          }}
+          // onChange={(event, newValue) => {
+          //   setValue(newValue) ;
+          // }}
         >
         <BottomNavigationAction className='bottom-navigation-action'
             label="Home" 

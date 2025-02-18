@@ -19,7 +19,6 @@
 }
 
 img {
-    /* margin-right: 10px; */
     width: 25%;
     text-align: center;
 }
@@ -30,7 +29,6 @@ h1{
 
 h2{
     margin-top: 3rem;
-    /* margin-bottom: 5rem; */
 }
 
 .splash {
@@ -53,11 +51,3 @@ a{
 .welcome{
     margin-top: 5rem;
 }
-
-/* 
-@media only screen {
-    .Logo {
-        /* visibility: hidden; */
-    /* display: none; 
-    }
-  }  */ 

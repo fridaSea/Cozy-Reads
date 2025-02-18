@@ -151,7 +151,7 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
           setUser(null);
         }).catch((error) => {
           // An error happened. - The user could not be signed out.
-          console.log("Probmelms sogninh out user");
+          console.log("Probmelm sogning out user");
         });
       }
 

@@ -39,11 +39,19 @@ function Navbar() {
                   
 
                 <li className='nav-item'>
-                 
                   {user ? (
-                    <NavLink to='/Login' className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} onClick={logout} color="inherit">Log out </NavLink>
+                    <NavLink 
+                    to='/Login' 
+                    className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} onClick={logout} color="inherit">Log out </NavLink>
                   ) : (
-                    <NavLink to='/Login' className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} onClick={login} variant="danger">Login </NavLink>
+                    <NavLink 
+                    to='/Login' 
+                    // variant="danger"
+                    className={({isActive}) => isActive ? 'nav-link nav-active' : 'nav-link'} 
+                    // onClick={login} 
+                    onClick={() => login('email', 'password')} 
+                    >
+                      Login </NavLink>
                   )
                   } 
                   </li>

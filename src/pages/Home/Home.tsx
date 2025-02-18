@@ -1,8 +1,7 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Book } from "./typesHome";
 import CarouselRatio from "../../components/Carousel/Carousel";
 import FullWidthTextField from "../../components/Searchfield";
-import { AuthContext } from "../../components/Context/AuthContext";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Box, CardMedia} from "@mui/material";

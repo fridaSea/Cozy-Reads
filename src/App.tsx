@@ -1,21 +1,18 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
-import './App.css'
 import Home from './pages/Home/Home'
 import Splash from './pages/Splash/Splash'
 import Navbar from './components/Navbar/Navbar'
 import NoMatchPage from './pages/NoMatchPage'
-import Background from './assets/Background.png'
 import SimpleBottomNavigation from './components/Footer/Footer'
 import Registration from './pages/Registration/Registration'
-
 import { AuthContextProvider } from './components/Context/AuthContext'
 import Login from './pages/Login/Login'
-import Favorites from './pages/Favorites/Favorites'
+// import Favorites from './pages/Favorites/Favorites'
 import ProtectedRoute from './components/ProtectedRoute'
 import BookDetail from './pages/BookDetail/BookDetail'
-import { app, auth, db } from './configuration/firebaseConfig'
 import Chat from './pages/Chat/Chat'
 import FAQ from './pages/FAQ/FAQ'
+import './App.css'
 
 const Root = () => {
     return (
@@ -54,7 +51,7 @@ function App() {
           <Route path="/faq" element={<FAQ/>}/>
           <Route path="/favorites" element={ 
             <ProtectedRoute>
-                <Favorites/>
+                {/* <Favorites/> */}
             </ProtectedRoute>
             }/>
           <Route path="/books/:bookDetail" element={<BookDetail/>}/>
