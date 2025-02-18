@@ -1,4 +1,5 @@
-import { Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, Stack, TextField } from "@mui/material"
+import Typography from '@mui/material/Typography';
 import { addDoc, collection, limit, onSnapshot, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "../../configuration/firebaseConfig";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
@@ -128,7 +129,7 @@ function Chat() {
 
 <Stack gap={1} className="align-items-center">
   <Card className="chat-card">
-  {messages && messages.map( (message, index) => {
+  {messages && messages.map( (message) => {
        let messageClass = '';
        if (message.author === user?.email) {
            messageClass = 'my-message'; // Wenn die Nachricht vom Benutzer stammt
